@@ -10,19 +10,20 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   token: string | null = null;
   refToken: string | null = null;
-  userLogin: string | null = null;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('accessToken');
     this.refToken = localStorage.getItem('refreshToken');
-    this.userLogin = localStorage.getItem('login');
+  }
+
+  isAuth(): boolean {
+    return !!this.token;
   }
 
   logout() {
-    localStorage.removeItem('login');
+    console.log("+")
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     this.token = null;
-    this.userLogin = null;
   }
 
   login(body: {
@@ -36,10 +37,8 @@ export class AuthService {
           console.log(payload)
           this.token = payload.accessToken;
           this.refToken = payload.refreshToken;
-          this.userLogin = body.login;
           localStorage.setItem('refreshToken', this.refToken);
           localStorage.setItem('accessToken', this.token);
-          localStorage.setItem('login', this.userLogin);
         }),
       );
   }

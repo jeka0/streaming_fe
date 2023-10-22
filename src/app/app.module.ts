@@ -9,15 +9,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { WrapperComponent } from './pages/wrapper/wrapper.component';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
+import { StreamPlayerComponent } from './shared/components/stream-player/stream-player.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    WrapperComponent,
+    StreamPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +35,15 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatToolbarModule,
+    MatMenuModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    multi: true,
+    useClass: AuthInterceptor,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

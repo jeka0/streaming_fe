@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <mat-toolbar class="toolbar">
+      <a routerLink="/">
+        <h2>Streaming</h2>
+      </a>
+      
+      <div class="wrapper-actions">
+        <div class="wrapper-user" *ngIf="profile">
+            <h3>{{ profile.login }}</h3>
+            <button
+            mat-icon-button
+            class="example-icon person-icon wrapper-button"
+            aria-label="Example icon-button with heart icon"
+            >
+            <mat-icon>person</mat-icon>
+            </button>
+        </div>
+    
+        <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            class="example-icon person-icon wrapper-button"
+            aria-label="Example icon-button with heart icon"
+        >
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+            <span>Logout</span>
+            </button>
+        </mat-menu>
+    </div>
+    </mat-toolbar>
+  
+    <div class="bodyForContent">
+        <div class="wrapper-menu"> </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+  
