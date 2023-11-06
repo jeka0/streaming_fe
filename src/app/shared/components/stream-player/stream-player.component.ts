@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import flvjs from 'flv.js';
 
 @Component({
@@ -8,9 +8,8 @@ import flvjs from 'flv.js';
 })
 export class StreamPlayerComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
-  flvPlayer?:flvjs.Player;
-
-  streamKey: string = '0h5143oc1';
+  @Input() streamKey: string = ''/* = '0h5143oc1'*/;
+  flvPlayer?: flvjs.Player;
 
   ngAfterViewInit() {
     this.playFLV();
@@ -30,7 +29,7 @@ export class StreamPlayerComponent {
     if (flvjs.isSupported()) {
       this.flvPlayer = flvjs.createPlayer({
         type: 'flv',
-        url: `http://localhost:8888/live/0h5143oc1.flv`,
+        url: `http://localhost:8888/live/${this.streamKey}.flv`,
       });
       this.flvPlayer.attachMediaElement(video);
       this.flvPlayer.load();

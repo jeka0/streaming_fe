@@ -16,6 +16,11 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { StreamPlayerComponent } from './shared/components/stream-player/stream-player.component';
+import { HomeComponent } from './pages/home/home.component';
+import { StreamComponent } from './pages/stream/stream.component';
+import { ChatComponent } from './shared/components/chat/chat.component';
+import { FormsModule } from '@angular/forms';
+import { MessageComponent } from './shared/components/message/message.component';
 
 
 @NgModule({
@@ -24,7 +29,11 @@ import { StreamPlayerComponent } from './shared/components/stream-player/stream-
     LoginComponent,
     RegistrationComponent,
     WrapperComponent,
-    StreamPlayerComponent
+    StreamPlayerComponent,
+    HomeComponent,
+    StreamComponent,
+    ChatComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,8 @@ import { StreamPlayerComponent } from './shared/components/stream-player/stream-
     MatFormFieldModule,
     MatToolbarModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

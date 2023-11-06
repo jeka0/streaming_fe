@@ -5,7 +5,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { NotAuthGuard } from './shared/guards/not-auth.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
-import { StreamPlayerComponent } from './shared/components/stream-player/stream-player.component';
+import { StreamComponent } from './pages/stream/stream.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,12 @@ const routes: Routes = [
     title: 'MyStreaming',
     children:[
       {
-        path: 'd',
-        component: StreamPlayerComponent,
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'stream',
+        component: StreamComponent,
       }
     ]
   },

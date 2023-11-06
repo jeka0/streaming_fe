@@ -6,6 +6,7 @@
 
   .toolbar{
     background-color: #242427;
+    border-bottom: 1px solid #ffffff3b;
   }
 
   a, .wrapper-user{
@@ -48,7 +49,7 @@
   .bodyForContent {
     display: flex;
     background: #d9d9d9;
-    flex-grow: 1;
+    flex: 1 0 auto;
     margin: 0;
   }
 
@@ -56,5 +57,10 @@
     background-color: #313135;
     width: 200px;
     height: 100%;
+    border-right: 1px solid #ffffff3b;
+  }
+
+  .wrapper-content{
+    width: 100%;
   }
   
