@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SocketService } from 'src/app/shared/services/socket.service';
 import { IMessage } from '../../interfaces/message.interface';
 import { MessageService } from '../../services/message.service';
@@ -9,6 +9,7 @@ import { MessageService } from '../../services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+    @Input() id!: Number;
     messageList: IMessage[] = [];
     message: String = "";
 
@@ -19,20 +20,24 @@ export class ChatComponent {
       socketService.socket.on("message", (message)=>{
         this.messageList.push(message);
       })
-      socketService.joinToChat(1);
-      messageService.getAllByChat(1).subscribe({
-        next: (messages)=> this.messageList.push(...messages.reverse()),
-        error: (err)=>console.log(err)
-      })
+    }
+
+    ngOnChanges(){
+      if(this.id){
+        this.socketService.joinToChat(this.id);
+        this.messageService.getAllByChat(this.id).subscribe({
+          next: (messages)=> this.messageList.push(...messages.reverse()),
+          error: (err)=>console.log(err)
+        })
+      }
     }
 
     sendMessage(){
-      this.socketService.sendMessage(1, this.message);
+      this.socketService.sendMessage(this.id, this.message);
       this.message = "";
     }
 
     ngOnDestroy(){
-      this.socketService.leaveChat(1);
-      console.log("+")
+      this.socketService.leaveChat(this.id);
     }
 }

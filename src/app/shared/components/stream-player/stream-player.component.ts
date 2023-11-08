@@ -8,11 +8,18 @@ import flvjs from 'flv.js';
 })
 export class StreamPlayerComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
-  @Input() streamKey: string = ''/* = '0h5143oc1'*/;
+  @Input() streamKey: string = '';
   flvPlayer?: flvjs.Player;
 
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
+    console.log(this.streamKey)
     this.playFLV();
+  }*/
+
+  ngOnChanges(){
+    if(this.streamKey) {
+      this.playFLV();
+    }
   }
 
   ngOnDestroy(){

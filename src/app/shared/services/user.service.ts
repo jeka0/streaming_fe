@@ -17,6 +17,10 @@ export class UserService {
     return this.http.get<IUser>(`${environment.apiURL}/user/${id}`);
   }
 
+  getByLogin(login: String): Observable<IUser> {
+    return this.http.post<IUser>(`${environment.apiURL}/user/login`, { login});
+  }
+
   getCurrent(): Observable<IUser> {
     return this.http
       .get<IUser>(`${environment.apiURL}/user`)

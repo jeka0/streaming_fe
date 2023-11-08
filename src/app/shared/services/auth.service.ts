@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log("+")
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     this.token = null;
@@ -34,7 +33,6 @@ export class AuthService {
       .post<{ accessToken: string, refreshToken: string }>(`${environment.apiURL}/auth/login`, body)
       .pipe(
         tap((payload) => {
-          console.log(payload)
           this.token = payload.accessToken;
           this.refToken = payload.refreshToken;
           localStorage.setItem('refreshToken', this.refToken);

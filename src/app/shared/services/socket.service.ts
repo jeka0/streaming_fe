@@ -22,27 +22,34 @@ export class SocketService {
     this.socket.on('error', err=>{
         console.log(err);
     });
-
-    this.socket.connect();
   }
 
   sendMessage(chatId: Number, message: String){
     this.socket.emit("message", {chatId, message});
   }
 
-  updateMessage = (chatId: Number, message: String)=>{
+  updateMessage(chatId: Number, message: String){
     this.socket.emit("update", {chatId, message});
   }
 
-  deleteMessage = (chatId: Number, id: Number)=>{
+  deleteMessage(chatId: Number, id: Number){
     this.socket.emit("delete", {chatId, id});
   }
       
-  joinToChat = (chatId: Number)=>{
+  joinToChat(chatId: Number){
     this.socket.emit("join", chatId);
   }
 
-  leaveChat = (chatId: Number)=>{
+  leaveChat(chatId: Number){
     this.socket.emit("leave", chatId);
   }
+
+  connect(){
+    this.socket.connect();
+  }
+
+  disconnect(){
+    this.socket.disconnect();
+  }
+
 }

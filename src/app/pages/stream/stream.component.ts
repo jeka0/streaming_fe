@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/shared/services/user.service';
+import { StreamService } from 'src/app/shared/services/stream.service';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-stream',
@@ -6,7 +9,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./stream.component.css']
 })
 export class StreamComponent {
-  streamKey: string = "0h5143oc1";
+  streamer!: IUser;
+  streamKey!: string;
+  chatId!: Number;
 
-  constructor(){}
+  constructor(
+    private userService: UserService,
+    private streamService: StreamService
+  ){
+      this.userService.getByLogin("stenffi").subscribe({
+        next: (user)=>{
+          this.streamKey = user.streamKey; this.streamer = user;
+          this.streamService.getUserLiveStream(user.id).subscribe({
+            next:(stream)=>{this.chatId = stream.chat.id; },
+            error: (err)=>console.log(err)
+          })
+        },
+        error: (err)=>console.log(err)
+      })
+
+  }
 }
