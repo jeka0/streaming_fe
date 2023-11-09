@@ -2,6 +2,6 @@ export interface IUser {
     id: Number;
     login: string;
     password?: string;
-    image?: any;
+    image?: string;
     streamKey: string;
-  }
+}

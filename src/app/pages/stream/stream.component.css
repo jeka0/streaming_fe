@@ -12,7 +12,32 @@
 
 .chat-container{
     margin: 0;
-    width: 300px;
+    width: 330px;
     background-color: #313135;
     border-left: 1px solid #ffffff3b;
+}
+
+.info-text{
+    margin-left: 10px;
+}
+
+.user-info{
+    margin-left: 10px;
+    display: flex;
+}
+
+h2, h3, h4{
+    margin: 0;
+    color: white;
+}
+
+h4{
+    color: rgb(141, 2, 255)
+}
+
+img{
+    width: 90px;
+    height: 90px;
+    border-radius: 9999px;
+    object-fit: cover;
 }

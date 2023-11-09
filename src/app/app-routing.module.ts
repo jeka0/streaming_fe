@@ -20,7 +20,7 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'stream',
+        path: ':name',
         component: StreamComponent,
       }
     ]

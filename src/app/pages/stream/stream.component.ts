@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { StreamService } from 'src/app/shared/services/stream.service';
-import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { mergeMap, of, Subject } from 'rxjs';
+import { IStream } from 'src/app/shared/interfaces/stream.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-stream',
@@ -9,24 +11,34 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
   styleUrls: ['./stream.component.css']
 })
 export class StreamComponent {
-  streamer!: IUser;
-  streamKey!: string;
-  chatId!: Number;
+  url: String ='http://localhost:3020/api/image/';
+  avatar: String = 'assets/Img/avatar.jpg';
+  stream!: IStream;
+  streamKey: Subject<string> = new Subject<string>();
+  chatId: Subject<Number>= new Subject<Number>();
 
   constructor(
     private userService: UserService,
-    private streamService: StreamService
-  ){
-      this.userService.getByLogin("stenffi").subscribe({
-        next: (user)=>{
-          this.streamKey = user.streamKey; this.streamer = user;
-          this.streamService.getUserLiveStream(user.id).subscribe({
-            next:(stream)=>{this.chatId = stream.chat.id; },
-            error: (err)=>console.log(err)
-          })
-        },
-        error: (err)=>console.log(err)
-      })
+    private streamService: StreamService,
+    private route: ActivatedRoute
+  ){}
 
+  ngOnInit(){
+    this.route.params.pipe(
+      mergeMap((params)=>{
+        return this.userService.getByLogin(params['name']);
+      }),
+      mergeMap((user)=>{
+        this.streamKey.next(user.streamKey);
+        return this.streamService.getUserLiveStream(user.id);
+      })
+    ).subscribe({
+      next:(stream)=>{ 
+        this.stream = stream;
+        if(stream.user.image)this.avatar = this.url + stream.user.image;
+        this.chatId.next(stream.chat.id);
+      },
+      error: (err)=>console.log(err)
+    })
   }
 }

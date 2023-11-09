@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, Input } from '@angular/core';
+import { Subject } from 'rxjs';
 import flvjs from 'flv.js';
 
 @Component({
@@ -8,18 +9,14 @@ import flvjs from 'flv.js';
 })
 export class StreamPlayerComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
-  @Input() streamKey: string = '';
+  @Input() streamKey!: Subject<string>;
   flvPlayer?: flvjs.Player;
 
-  /*ngAfterViewInit() {
-    console.log(this.streamKey)
-    this.playFLV();
-  }*/
-
-  ngOnChanges(){
-    if(this.streamKey) {
-      this.playFLV();
-    }
+  ngAfterViewInit() {
+    this.streamKey.subscribe({
+      next:(streamKey)=>this.playFLV(streamKey),
+      error:(err)=>console.log(err)
+    })
   }
 
   ngOnDestroy(){
@@ -31,12 +28,12 @@ export class StreamPlayerComponent {
     }
   }
 
-  playFLV(){
+  playFLV(streamKey: string){
     const video = this.videoPlayer.nativeElement;
     if (flvjs.isSupported()) {
       this.flvPlayer = flvjs.createPlayer({
         type: 'flv',
-        url: `http://localhost:8888/live/${this.streamKey}.flv`,
+        url: `http://localhost:8888/live/${streamKey}.flv`,
       });
       this.flvPlayer.attachMediaElement(video);
       this.flvPlayer.load();

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SocketService } from 'src/app/shared/services/socket.service';
 import { IMessage } from '../../interfaces/message.interface';
 import { MessageService } from '../../services/message.service';
+import { Subject, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -9,7 +10,8 @@ import { MessageService } from '../../services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-    @Input() id!: Number;
+    @Input() obsId!: Subject<Number>;
+    id!: Number;
     messageList: IMessage[] = [];
     message: String = "";
 
@@ -22,14 +24,17 @@ export class ChatComponent {
       })
     }
 
-    ngOnChanges(){
-      if(this.id){
-        this.socketService.joinToChat(this.id);
-        this.messageService.getAllByChat(this.id).subscribe({
-          next: (messages)=> this.messageList.push(...messages.reverse()),
-          error: (err)=>console.log(err)
+    ngOnInit(){
+      this.obsId.pipe(
+        mergeMap((id)=>{
+          this.id = id;
+          this.socketService.joinToChat(id);
+          return this.messageService.getAllByChat(id);
         })
-      }
+      ).subscribe({
+        next: (messages)=> this.messageList.push(...messages.reverse()),
+        error: (err)=>console.log(err)
+      })
     }
 
     sendMessage(){
