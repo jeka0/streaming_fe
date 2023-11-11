@@ -1,5 +1,4 @@
 import { IUser } from "./user.interface";
-import { IChat } from "./chat.interface";
 
 export interface IStream{
     id: Number;
@@ -9,5 +8,4 @@ export interface IStream{
     end_time?: Date;
     viewer_count: Number;
     user: IUser;
-    chat: IChat;
 }

@@ -30,13 +30,13 @@ export class StreamComponent {
       }),
       mergeMap((user)=>{
         this.streamKey.next(user.streamKey);
+        this.chatId.next(user.chat.id);
         return this.streamService.getUserLiveStream(user.id);
       })
     ).subscribe({
       next:(stream)=>{ 
         this.stream = stream;
         if(stream.user.image)this.avatar = this.url + stream.user.image;
-        this.chatId.next(stream.chat.id);
       },
       error: (err)=>console.log(err)
     })

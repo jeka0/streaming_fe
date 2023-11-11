@@ -10,6 +10,18 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
+    path: 'login',
+    canActivate: [NotAuthGuard],
+    component: LoginComponent,
+    title: 'Login',
+  },
+  {
+    path: 'registration',
+    canActivate: [NotAuthGuard],
+    component: RegistrationComponent,
+    title: 'Registration',
+  },
+  {
     path: '',
     component: WrapperComponent,
     canActivate: [AuthGuard],
@@ -24,18 +36,6 @@ const routes: Routes = [
         component: StreamComponent,
       }
     ]
-  },
-  {
-    path: 'login',
-    canActivate: [NotAuthGuard],
-    component: LoginComponent,
-    title: 'Login',
-  },
-  {
-    path: 'registration',
-    canActivate: [NotAuthGuard],
-    component: RegistrationComponent,
-    title: 'Registration',
   },
 ];
 
