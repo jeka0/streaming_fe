@@ -11,7 +11,11 @@ export class StreamService {
 
   constructor(private http: HttpClient) { }
 
-  getUserLiveStream(id: Number): Observable<IStream>{
-    return this.http.get<any>(`${environment.apiURL}/stream/live/user/${id}`);
+  getLiveStream(streamKey: String): Observable<IStream>{
+    return this.http.post<IStream>(`${environment.apiURL}/stream/live/key`, {streamKey});
+  }
+
+  getLiveStreams():Observable<any>{
+    return this.http.get<any>('http://localhost:8888/api/streams');
   }
 }

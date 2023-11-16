@@ -4,6 +4,7 @@ import { StreamService } from 'src/app/shared/services/stream.service';
 import { mergeMap, of, Subject } from 'rxjs';
 import { IStream } from 'src/app/shared/interfaces/stream.interface';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-stream',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./stream.component.css']
 })
 export class StreamComponent {
-  url: String ='http://localhost:3020/api/image/';
+  url: String = `${environment.apiURL}/image/`;
   avatar: String = 'assets/Img/avatar.jpg';
   stream!: IStream;
   streamKey: Subject<string> = new Subject<string>();
@@ -31,7 +32,7 @@ export class StreamComponent {
       mergeMap((user)=>{
         this.streamKey.next(user.streamKey);
         this.chatId.next(user.chat.id);
-        return this.streamService.getUserLiveStream(user.id);
+        return this.streamService.getLiveStream(user.streamKey);
       })
     ).subscribe({
       next:(stream)=>{ 

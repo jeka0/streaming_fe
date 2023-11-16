@@ -21,6 +21,7 @@ import { StreamComponent } from './pages/stream/stream.component';
 import { ChatComponent } from './shared/components/chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './shared/components/message/message.component';
+import { StreamPreviewComponent } from './shared/components/stream-preview/stream-preview.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MessageComponent } from './shared/components/message/message.component'
     HomeComponent,
     StreamComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    StreamPreviewComponent
   ],
   imports: [
     BrowserModule,
