@@ -33,7 +33,11 @@
     </mat-toolbar>
   
     <div class="bodyForContent">
-        <div class="wrapper-menu"> </div>
+        <div class="wrapper-menu"> 
+            <ng-container *ngFor="let user of list">
+                <app-user-preview *ngIf="user" [user]="user"></app-user-preview>
+            </ng-container>
+        </div>
         <div class="wrapper-content">
             <router-outlet></router-outlet>
         </div>

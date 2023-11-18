@@ -1,12 +1,16 @@
 <div class="stream-container">
     <div class="stream-content">
         <app-stream-player [streamKey]="streamKey"></app-stream-player>
-        <div class="user-info" *ngIf="stream">
+        <div class="stream-info" *ngIf="stream">
             <img [src]="avatar"/>
             <div class="info-text">
-            <h2>{{stream.user.login}}</h2> 
-            <h3>{{stream.stream_title}}</h3>
-            <h4>{{stream.category}}</h4>
+                <h2>{{stream.user.login}}</h2> 
+                <h3>{{stream.stream_title}}</h3>
+                <h4>{{stream.category}}</h4>
+            </div>
+            <div class="stream-actions">
+                <button *ngIf="!subscribed" class="unsub" (click)="subscribe()">Отслеживать</button>
+                <button *ngIf="subscribed" class="sub" (click)="unsubscribe()">Отписаться</button>
             </div>
         </div>
     </div>

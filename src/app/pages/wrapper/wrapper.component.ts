@@ -4,6 +4,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { SocketService } from 'src/app/shared/services/socket.service';
+import { switchMap } from 'rxjs'
 
 @Component({
   selector: 'app-wrapper',
@@ -12,6 +13,7 @@ import { SocketService } from 'src/app/shared/services/socket.service';
 })
 export class WrapperComponent {
   profile?: IUser;
+  list: IUser[] = [];
 
   constructor(
     private readonly authService: AuthService,
@@ -19,8 +21,12 @@ export class WrapperComponent {
     private readonly socketService: SocketService,
     private router: Router,
     ){
-      this.userService.getCurrent().subscribe({
-        next: user=>{this.profile = user},
+      this.userService.getCurrent().pipe(
+        switchMap((user)=>{
+          return userService.profile;
+        })
+      ).subscribe({
+        next: user=>{this.profile = user; if(user)this.list = user.subscription;},
         error: (err) => console.error(err),
       });
       this.socketService.connect();

@@ -1,0 +1,12 @@
+<a [routerLink]="user.login" class="link">
+    <div class="user-preview">
+        <img [src]="avatar"/>
+        <div class="user-preview-info">
+            <h3>{{user.login}}</h3>
+        </div>
+        <div class="user-preview-status">
+            <div *ngIf="status" class="circle"></div>
+            <h5>{{status}}</h5>
+        </div>
+    </div>
+</a>

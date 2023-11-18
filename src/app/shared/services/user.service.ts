@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  profile?: IUser;
+  profile: BehaviorSubject<IUser | undefined>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { this.profile = new BehaviorSubject<IUser | undefined>(undefined); }
 
   getById(id: number): Observable<IUser> {
     return this.http.get<IUser>(`${environment.apiURL}/user/${id}`);
@@ -26,7 +26,7 @@ export class UserService {
       .get<IUser>(`${environment.apiURL}/user`)
       .pipe(
         tap((user) => {
-          this.profile = user;
+          this.profile.next(user);
         }),
       );
   }
@@ -53,5 +53,23 @@ export class UserService {
 
   deleteCurrent(): Observable<{message: string}>{
     return this.http.delete<{message: string}>(`${environment.apiURL}/user`);
+  }
+
+  follow(id: Number): Observable<IUser>{
+    return this.http.get<IUser>(`${environment.apiURL}/user/follow/${id}`)
+    .pipe(
+      tap((user) => {
+        this.profile.next(user);
+      }),
+    );;
+  }
+
+  unfollow(id: Number): Observable<IUser>{
+    return this.http.get<IUser>(`${environment.apiURL}/user/unfollow/${id}`)
+    .pipe(
+      tap((user) => {
+        this.profile.next(user);
+      }),
+    );;
   }
 }

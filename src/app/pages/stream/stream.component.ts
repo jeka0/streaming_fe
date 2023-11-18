@@ -17,12 +17,14 @@ export class StreamComponent {
   stream!: IStream;
   streamKey: Subject<string> = new Subject<string>();
   chatId: Subject<Number>= new Subject<Number>();
+  subscribed: Boolean = false;
 
   constructor(
     private userService: UserService,
     private streamService: StreamService,
     private route: ActivatedRoute
-  ){}
+  ){
+  }
 
   ngOnInit(){
     this.route.params.pipe(
@@ -33,13 +35,31 @@ export class StreamComponent {
         this.streamKey.next(user.streamKey);
         this.chatId.next(user.chat.id);
         return this.streamService.getLiveStream(user.streamKey);
-      })
-    ).subscribe({
-      next:(stream)=>{ 
+      }),
+      mergeMap((stream)=>{ 
         this.stream = stream;
         if(stream.user.image)this.avatar = this.url + stream.user.image;
+        return this.userService.profile;
+      })
+    ).subscribe({
+      next:(profileUser)=>{
+        this.subscribed = profileUser?.subscription.some((user)=>user.id === this.stream.user.id) || false
       },
       error: (err)=>console.log(err)
     })
+  }
+
+  subscribe(){
+    this.userService.follow(this.stream.user.id).subscribe({
+      next:(user)=>{},
+      error:(err)=>console.log(err)
+    });
+  }
+
+  unsubscribe(){
+    this.userService.unfollow(this.stream.user.id).subscribe({
+      next:(user)=>{},
+      error:(err)=>console.log(err)
+    });
   }
 }

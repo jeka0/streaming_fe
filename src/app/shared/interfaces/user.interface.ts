@@ -7,4 +7,6 @@ export interface IUser {
     image?: string;
     streamKey: string;
     chat: IChat;
+    status: Boolean;
+    subscription: IUser[];
 }
