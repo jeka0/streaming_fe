@@ -4,14 +4,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   profile: BehaviorSubject<IUser | undefined>;
+  private savedRange: IUser[] = []; 
 
-  constructor(private http: HttpClient) { this.profile = new BehaviorSubject<IUser | undefined>(undefined); }
+  constructor(
+    private http: HttpClient,
+    private socketService: SocketService
+  ) { 
+    this.profile = new BehaviorSubject<IUser | undefined>(undefined); 
+    this.profile.subscribe({
+      next:(user)=>{
+        if(user)this.savedRange=user?.subscription;
+      },
+      error:err=>console.log(err)
+    })
+  }
 
   getById(id: number): Observable<IUser> {
     return this.http.get<IUser>(`${environment.apiURL}/user/${id}`);
@@ -26,6 +39,7 @@ export class UserService {
       .get<IUser>(`${environment.apiURL}/user`)
       .pipe(
         tap((user) => {
+          this.trackingUpdate(user);
           this.profile.next(user);
         }),
       );
@@ -59,6 +73,7 @@ export class UserService {
     return this.http.get<IUser>(`${environment.apiURL}/user/follow/${id}`)
     .pipe(
       tap((user) => {
+        this.trackingUpdate(user);
         this.profile.next(user);
       }),
     );;
@@ -68,8 +83,16 @@ export class UserService {
     return this.http.get<IUser>(`${environment.apiURL}/user/unfollow/${id}`)
     .pipe(
       tap((user) => {
+        this.trackingUpdate(user);
         this.profile.next(user);
       }),
     );;
+  }
+
+  trackingUpdate(user: IUser){
+      const set1 = new Set(this.savedRange);
+      const set2 = new Set(user.subscription);
+      this.socketService.joinRange(user.subscription.filter(e => !set1.has(e)));
+      this.socketService.leaveRange(this.savedRange.filter(e => !set2.has(e)));
   }
 }

@@ -28,7 +28,7 @@ export class ChatComponent {
       this.obsId.pipe(
         mergeMap((id)=>{
           this.id = id;
-          this.socketService.joinToChat(id);
+          this.socketService.joinTo(id);
           return this.messageService.getAllByChat(id);
         })
       ).subscribe({
@@ -43,6 +43,6 @@ export class ChatComponent {
     }
 
     ngOnDestroy(){
-      this.socketService.leaveChat(this.id);
+      this.socketService.leaveFrom(this.id);
     }
 }

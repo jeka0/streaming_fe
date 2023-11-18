@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { io, Socket } from 'socket.io-client';
+import { IUser } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +37,20 @@ export class SocketService {
     this.socket.emit("delete", {chatId, id});
   }
       
-  joinToChat(chatId: Number){
+  joinTo(chatId: Number){
     this.socket.emit("join", chatId);
   }
 
-  leaveChat(chatId: Number){
+  leaveFrom(chatId: Number){
     this.socket.emit("leave", chatId);
+  }
+
+  joinRange(range: IUser[]){
+    this.socket.emit("joinRange", range);
+  }
+
+  leaveRange(range: IUser[]){
+    this.socket.emit("leaveRange", range);
   }
 
   connect(){

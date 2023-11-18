@@ -33,7 +33,7 @@ export class HomeComponent {
         toArray(),
     )
     .subscribe({
-      next:(streams)=>{console.log(streams);this.streams = streams},
+      next:(streams)=>{this.streams = streams},
       error:(err)=>console.log(err)
     })
   }
