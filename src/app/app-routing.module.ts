@@ -7,6 +7,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { StreamComponent } from './pages/stream/stream.component';
 import { HomeComponent } from './pages/home/home.component';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'user-settings',
+        component: UserSettingsComponent,
       },
       {
         path: ':name',

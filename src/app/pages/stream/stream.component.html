@@ -2,7 +2,7 @@
     <div class="stream-content">
         <app-stream-player [streamKey]="streamKey"></app-stream-player>
         <div class="stream-info" *ngIf="stream">
-            <img [src]="avatar"/>
+            <app-image-template [name]="this.image"></app-image-template>
             <div class="info-text">
                 <h2>{{stream.user.login}}</h2> 
                 <h3>{{stream.stream_title}}</h3>

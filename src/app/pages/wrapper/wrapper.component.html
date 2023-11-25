@@ -7,13 +7,7 @@
       <div class="wrapper-actions">
         <div class="wrapper-user" *ngIf="profile">
             <h3>{{ profile.login }}</h3>
-            <button
-            mat-icon-button
-            class="example-icon person-icon wrapper-button"
-            aria-label="Example icon-button with heart icon"
-            >
-            <mat-icon>person</mat-icon>
-            </button>
+            <app-image-template [name]="image"></app-image-template>
         </div>
     
         <button
@@ -24,9 +18,12 @@
         >
             <mat-icon>more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu" class="customize">
+            <a routerLink="/user-settings">
+                <button mat-menu-item>Account settings</button>
+            </a>
             <button mat-menu-item (click)="logout()">
-            <span>Logout</span>
+                <span>Logout</span>
             </button>
         </mat-menu>
     </div>
@@ -34,6 +31,8 @@
   
     <div class="bodyForContent">
         <div class="wrapper-menu"> 
+            <h2>Отслеживаемые каналы</h2>
+            <hr/>
             <ng-container *ngFor="let user of list">
                 <app-user-preview *ngIf="user" [user]="user"></app-user-preview>
             </ng-container>

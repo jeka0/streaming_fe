@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IStream } from '../../interfaces/stream.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-stream-preview',
@@ -10,11 +11,14 @@ import { IStream } from '../../interfaces/stream.interface';
 export class StreamPreviewComponent {
   @Input() stream!: IStream;
   streamUrl: String = "";
-  avatar: String = 'assets/Img/avatar.jpg';
-  url: String = `${environment.apiURL}/image/`;
+  image: BehaviorSubject<string | undefined>;
+
+  constructor(){
+    this.image = new BehaviorSubject<string | undefined>(undefined);
+  }
 
   ngOnInit(){
     this.streamUrl = `${environment.apiURL}/thumbnail/${this.stream.user.streamKey}.png`;
-    if(this.stream.user.image) this.avatar = this.url + this.stream.user.image;
+    this.image.next(this.stream.user.image)
   }
 }

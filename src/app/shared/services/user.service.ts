@@ -50,6 +50,11 @@ export class UserService {
       .get<Array<IUser>>(`${environment.apiURL}/user/all`);
   }
 
+  generateNewStreamKey(): Observable<{message: string}> {
+    return this.http
+      .get<{message: string}>(`${environment.apiURL}/user/key`);
+  }
+
   search(body: {
     name: string;
   }): Observable<Array<IUser>> {
@@ -57,11 +62,7 @@ export class UserService {
       .post<Array<IUser>>(`${environment.apiURL}/user/search`, body);
   }
 
-  updateCurrent(body: {
-    password?: string;
-    login?: string;
-    image?: any
-  }): Observable<{message: string}> {
+  updateCurrent(body: FormData): Observable<{message: string}> {
     return this.http.put<{message: string}>(`${environment.apiURL}/user`, body);
   }
 

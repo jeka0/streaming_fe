@@ -19,6 +19,13 @@
     display: flex;
     margin-left: auto;
   }
+
+  :host ::ng-deep img{
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
   
   .wrapper-user {
     display: flex;
@@ -27,6 +34,15 @@
 
   h3, h2{
     margin: 0;
+  }
+
+  h2{
+    color: white;
+  }
+
+  hr, h2{
+    margin-left: 5px;
+    margin-right: 5px;
   }
   
   a, h3 {
@@ -44,6 +60,8 @@
     border: 0;
     background: transparent;
     color: #fff;
+    width: 50px;
+    height: 50px;
   }
   
   .bodyForContent {
@@ -63,4 +81,14 @@
   .wrapper-content{
     width: 100%;
   }
+
+  ::ng-deep .customize{
+    background-color: rgb(58, 58, 58);
+  }
+
+  ::ng-deep .customize span{
+    color: white;
+  }
+
+  
   

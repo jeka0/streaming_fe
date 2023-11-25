@@ -35,11 +35,9 @@ h4{
     color: rgb(141, 2, 255)
 }
 
-img{
+:host ::ng-deep img{
     width: 90px;
     height: 90px;
-    border-radius: 9999px;
-    object-fit: cover;
     margin-left: 10px;
 }
 

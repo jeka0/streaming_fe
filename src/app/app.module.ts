@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './shared/components/message/message.component';
 import { StreamPreviewComponent } from './shared/components/stream-preview/stream-preview.component';
 import { UserPreviewComponent } from './shared/components/user-preview/user-preview.component';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ImageTemplateComponent } from './shared/components/image-template/image-template.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { UserPreviewComponent } from './shared/components/user-preview/user-prev
     ChatComponent,
     MessageComponent,
     StreamPreviewComponent,
-    UserPreviewComponent
+    UserPreviewComponent,
+    UserSettingsComponent,
+    ImageTemplateComponent
   ],
   imports: [
     BrowserModule,

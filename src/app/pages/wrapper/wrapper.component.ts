@@ -4,7 +4,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { SocketService } from 'src/app/shared/services/socket.service';
-import { switchMap } from 'rxjs'
+import { switchMap, BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-wrapper',
@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs'
 export class WrapperComponent {
   profile?: IUser;
   list: IUser[] = [];
+  image: BehaviorSubject<string | undefined>;
 
   constructor(
     private readonly authService: AuthService,
@@ -21,12 +22,19 @@ export class WrapperComponent {
     private readonly socketService: SocketService,
     private router: Router,
     ){
+      this.image = new BehaviorSubject<string | undefined>(undefined);
       this.userService.getCurrent().pipe(
         switchMap((user)=>{
           return userService.profile;
         })
       ).subscribe({
-        next: user=>{this.profile = user; if(user)this.list = user.subscription;},
+        next: user=>{
+          this.profile = user; 
+          if(user){
+            this.list = user.subscription;
+            if(user.image)this.image.next(user.image);
+          }
+        },
         error: (err) => console.error(err),
       });
       this.socketService.connect();

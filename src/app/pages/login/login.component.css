@@ -9,13 +9,22 @@
 .login-background {
   width: 100%;
   height: 100%;
-  background-color: #f0f0f0;
+  background-color: #242427;
 }
 
 .login-container {
-  background-color: #ffffff;
+  background-color: #313135;
   padding: 60px 50px;
   border-radius: 26px;
+  border: 1px solid #ffffff3b;
+}
+
+mat-form-field, mat-label, h1, .mat-primary input{
+  color: white;
+}
+
+.mat-primary input::placeholder {
+  color: rgba(255, 255, 255, 0.425);
 }
 
 .mat-input {
@@ -48,5 +57,5 @@
 
 a{
     margin-top: 10px;
-    color:rgb(0, 0, 0);
+    color:white;
 }
