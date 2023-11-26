@@ -1,0 +1,49 @@
+<div class="registration-background">
+    <div [formGroup]="formGroup" class="registration-container">
+      <h1><strong>Registration</strong></h1>
+  
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Login</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Login"
+          formControlName="login"
+        />
+        <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
+            Login is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="password"
+          formControlName="password"
+        />
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{ showPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('registration')">
+          This login is already in use by another account
+        </mat-error>
+      </mat-form-field>
+  
+      <button
+        mat-button
+        class="mat-button"
+        color="custom"
+        [disabled]="formGroup.invalid"
+        (click)="register()"
+      >
+      Register
+      </button>
+      <a routerLink="../login">Login</a>
+    </div>
+</div>
+  

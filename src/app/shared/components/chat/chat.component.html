@@ -1,0 +1,12 @@
+<div class="chat">
+    <div class="chat-content">
+        <div class="chat-message" *ngFor = "let message of messageList">
+            <app-message [message]="message"></app-message>
+        </div>
+        <div class="target" #targetElement>target</div>
+    </div>
+    <div class="chat-action">
+        <input [(ngModel)]="message" />
+        <button mat-button (click)="sendMessage()">Send</button>
+    </div>
+</div>

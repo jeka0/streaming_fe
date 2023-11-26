@@ -1,0 +1,99 @@
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .toolbar{
+    background-color: #242427;
+    border-bottom: 1px solid #ffffff3b;
+    height: 6%;
+  }
+
+  a, .wrapper-user{
+    display: flex;
+    align-items: center;
+
+  }
+
+  .wrapper-actions{
+    display: flex;
+    margin-left: auto;
+  }
+
+  :host ::ng-deep img{
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  
+  .wrapper-user {
+    display: flex;
+    justify-content: center;
+  }
+
+  h3, h2{
+    margin: 0;
+  }
+
+  h2{
+    color: white;
+  }
+
+  hr, h2{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  a, h3 {
+    text-decoration: none;
+    color: white;
+  }
+  
+  body {
+    width: 100%;
+    height: 100%;
+    background: #d9d9d9;
+  }
+  
+  .wrapper-button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .bodyForContent {
+    display: flex;
+    background: #d9d9d9;
+    flex: 1 0 auto;
+    margin: 0;
+    height: 80%;
+    position: relative;
+  }
+
+  .wrapper-menu{
+    background-color: #313135;
+    width: 250px;
+    height: 100%;
+    border-right: 1px solid #ffffff3b;
+  }
+
+  .wrapper-content{
+    flex-grow: 1;
+    width: 94%;
+    overflow-y: auto;
+  }
+
+  ::ng-deep .customize{
+    background-color: rgb(58, 58, 58);
+  }
+
+  ::ng-deep .customize span{
+    color: white;
+  }
+
+  
+  

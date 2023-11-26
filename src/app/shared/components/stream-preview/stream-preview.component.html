@@ -1,0 +1,14 @@
+<div class="stream-preview">
+    <a [routerLink]="routerLink">
+        <img [src]="streamUrl"/>
+        <div class="stream-preview-user">
+            <app-image-template [name]="this.image"></app-image-template>
+            <div class="stream-info">
+                <h4><strong>{{stream.stream_title}}</strong></h4>
+                <h5>{{stream.user.login}}</h5>
+                <h5>{{stream.category}}</h5>
+            </div>
+        </div>
+    </a>
+</div>
+

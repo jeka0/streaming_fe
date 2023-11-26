@@ -1,0 +1,54 @@
+<div class="login-background">
+    <div [formGroup]="formGroup" class="login-container">
+      <h1><strong>Login</strong></h1>
+  
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Login</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="login"
+          formControlName="login"
+          (input)="change()"
+        />
+        <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
+          Login is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls['login'].hasError('login')">
+          Invalid login or password
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="password"
+          formControlName="password"
+          (input)="change()"
+        />
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{ showPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('login')">
+          Invalid login or password
+        </mat-error>
+      </mat-form-field>
+  
+      <button
+        mat-button
+        class="mat-button"
+        color="custom"
+        [disabled]="formGroup.invalid"
+        (click)="login()"
+      >
+        Login
+      </button>
+      <a routerLink="../registration">Registration</a>
+    </div>
+</div>
+  

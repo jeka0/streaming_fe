@@ -1,0 +1,140 @@
+<div class="settings-background">
+    <h1>Настройки</h1>
+    <div class="settings">
+    <div class="info" *ngIf="formGroup && profile" [formGroup]="formGroup">
+        <h2>Настройки аккаунта</h2>
+        <div class="settings-box">
+            <app-image-template [name]="this.image"></app-image-template>
+            <div class="image-active">
+                <h3>Изображение профиля</h3>
+                <button
+                mat-button
+                class="mat-button"
+                id="loadImage"
+                color="custom"
+                (click)="imageInput.click()"
+            >
+            Обновить изображение профиля
+            </button>
+            <input
+                type="file"
+                accept="image/*"
+                hidden
+                #imageInput
+                (change)="onLoadImage($event)"
+            />
+            </div>
+        </div>
+        <div class="settings-box login-box">
+            <div class="info-block">
+                <h3>Имя пользователя</h3>
+            </div>
+            <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Login</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Login"
+                  formControlName="login"
+                />
+                <mat-error *ngIf="formGroup.controls['login'].invalid">
+                  Login is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+        </div>
+        <div class="settings-box login-box">
+            <div class="info-block">
+                <h3>Пароль пользователя</h3>
+            </div>
+            <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+              </mat-form-field>
+        </div>
+        <div class="settings-box login-box box-active">
+            <button
+                mat-button
+                class="mat-button"
+                color="custom"
+                id="save"
+                [disabled]="formGroup.invalid || !this.formGroup.dirty"
+                (click)="updateUser()"
+            >   
+            Сохранить изменения</button>
+        </div>
+    </div>
+    <div class="info" *ngIf="formGroup2" [formGroup]="formGroup2">
+        <h2>Настройки трансляции</h2>
+        <div class="settings-box login-box first-box">
+            <div class="info-block">
+                <h3>Название трансляции</h3>
+            </div>
+            <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Stream title</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Stream title"
+                  formControlName="stream_title"
+                />
+              </mat-form-field>
+        </div>
+        <div class="settings-box login-box">
+            <div class="info-block">
+                <h3>Категория трансляции</h3>
+            </div>
+            <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Category</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Category"
+                  formControlName="category"
+                />
+                <mat-error *ngIf="formGroup2.controls['category'].invalid">
+                    Category is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+        </div>
+        <div class="settings-box login-box">
+            <div class="info-block">
+                <h3>Ключ трансляции</h3>
+            </div>
+            <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Stream key</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Stream key"
+                  [value]="this.profile?.streamKey"
+                  readonly
+                />
+              </mat-form-field>
+              <button
+              mat-button
+              class="mat-button"
+              color="custom"
+              id="generate"
+              (click)="generateNewKey()"
+          >   
+          Сгенерировать новый ключ</button>
+        </div>
+        <div class="settings-box login-box box-active">
+            <button
+                mat-button
+                class="mat-button"
+                color="custom"
+                id="save"
+                [disabled]="formGroup2.invalid || !this.formGroup2.dirty"
+                (click)="updateSettings()"
+            >   
+            Сохранить изменения</button>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+.stream-preview{
+    width: 350px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.stream-preview img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.stream-preview-user{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px 0 5px 0;
+}
+
+
+:host ::ng-deep img{
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.stream-preview-user .stream-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    padding: 0;
+}
+
+h4, h5, strong{
+    word-break: break-all;
+    word-break: break-word;
+    margin: 0;
+}
+
+h4{
+    color: rgba(240, 248, 255, 0.808);
+}
+
+h5{
+    color: rgba(240, 248, 255, 0.548);
+}
+
+a{
+    text-decoration: none;
+}
