@@ -18,4 +18,12 @@ export class StreamService {
   getLiveStreams():Observable<any>{
     return this.http.get<any>('http://localhost:8888/api/streams');
   }
+
+  getUserStreams(id: Number): Observable<IStream[]>{
+    return this.http.get<IStream[]>(`${environment.apiURL}/stream/user/${id}`);
+  }
+
+  getStreamByRecording(name: string): Observable<IStream>{
+    return this.http.get<IStream>(`${environment.apiURL}/stream/recording/${name}`);
+  }
 }

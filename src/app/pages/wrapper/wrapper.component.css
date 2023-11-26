@@ -7,6 +7,7 @@
   .toolbar{
     background-color: #242427;
     border-bottom: 1px solid #ffffff3b;
+    height: 6%;
   }
 
   a, .wrapper-user{
@@ -69,6 +70,8 @@
     background: #d9d9d9;
     flex: 1 0 auto;
     margin: 0;
+    height: 80%;
+    position: relative;
   }
 
   .wrapper-menu{
@@ -79,7 +82,9 @@
   }
 
   .wrapper-content{
-    width: 100%;
+    flex-grow: 1;
+    width: 94%;
+    overflow-y: auto;
   }
 
   ::ng-deep .customize{

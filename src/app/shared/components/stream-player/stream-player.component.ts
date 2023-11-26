@@ -10,11 +10,19 @@ import flvjs from 'flv.js';
 export class StreamPlayerComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
   @Input() streamKey!: Subject<string>;
+  @Input() video?: string;
+  url?: string;
   flvPlayer?: flvjs.Player;
+  baseUrl: string = "http://localhost:8888/live/";
 
   ngAfterViewInit() {
     this.streamKey.subscribe({
-      next:(streamKey)=>this.playFLV(streamKey),
+      next:(streamKey)=>{
+        if(!this.video)this.playFLV(streamKey)
+        else{
+          this.url = `${this.baseUrl}${streamKey}/${this.video}`;
+        }
+      },
       error:(err)=>console.log(err)
     })
   }
@@ -33,7 +41,7 @@ export class StreamPlayerComponent {
     if (flvjs.isSupported()) {
       this.flvPlayer = flvjs.createPlayer({
         type: 'flv',
-        url: `http://localhost:8888/live/${streamKey}.flv`,
+        url: `${this.baseUrl}${streamKey}.flv`,
       });
       this.flvPlayer.attachMediaElement(video);
       this.flvPlayer.load();

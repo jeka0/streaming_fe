@@ -1,0 +1,12 @@
+<div class="user-background">
+    <div class="user-info" *ngIf="this.user">
+        <app-image-template class="user" [name]="this.image"></app-image-template>
+        <h1>{{user.login}}</h1>
+    </div>
+    <hr/>
+    <div class="stream-list">
+        <ng-container *ngFor="let stream of streams">
+            <app-stream-preview *ngIf="stream" [live]="false" [stream]="stream" ></app-stream-preview>
+        </ng-container>
+    </div>
+</div>

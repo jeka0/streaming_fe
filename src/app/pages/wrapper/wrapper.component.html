@@ -6,8 +6,10 @@
       
       <div class="wrapper-actions">
         <div class="wrapper-user" *ngIf="profile">
-            <h3>{{ profile.login }}</h3>
-            <app-image-template [name]="image"></app-image-template>
+            <a [routerLink]="profile.login">
+                <h3>{{ profile.login }}</h3>
+                <app-image-template [name]="image"></app-image-template>
+            </a>
         </div>
     
         <button
@@ -19,6 +21,9 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" class="customize">
+            <a *ngIf="profile" [routerLink]="profile.login">
+                <button mat-menu-item>My account</button>
+            </a>
             <a routerLink="/user-settings">
                 <button mat-menu-item>Account settings</button>
             </a>

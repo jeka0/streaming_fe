@@ -31,8 +31,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.formGroup.value).subscribe({
       next: () => this.router.navigateByUrl('/'),
-      error: (err) => console.error(err),
+      error: (err) => {this.formGroup.controls['login'].setErrors({'login': true}); this.formGroup.controls['password'].setErrors({'login': true})},
     });
+  }
+
+  change(){
+    if(this.formGroup.controls['password'].hasError('required') || this.formGroup.controls['login'].hasError('required')) return;
+    this.formGroup.controls['password'].setErrors(null);
+    this.formGroup.controls['login'].setErrors(null);
   }
 
   ngOnInit(): void {}

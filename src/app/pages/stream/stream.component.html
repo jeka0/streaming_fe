@@ -1,13 +1,15 @@
 <div class="stream-container">
     <div class="stream-content">
-        <app-stream-player [streamKey]="streamKey"></app-stream-player>
+        <app-stream-player [streamKey]="streamKey" [video]="videoUrl"></app-stream-player>
         <div class="stream-info" *ngIf="stream">
-            <app-image-template [name]="this.image"></app-image-template>
-            <div class="info-text">
-                <h2>{{stream.user.login}}</h2> 
-                <h3>{{stream.stream_title}}</h3>
-                <h4>{{stream.category}}</h4>
-            </div>
+            <a class="stream-link" routerLink="../">
+                <app-image-template [name]="this.image"></app-image-template>
+                <div class="info-text">
+                    <h2>{{stream.user.login}}</h2> 
+                    <h3>{{stream.stream_title}}</h3>
+                    <h4>{{stream.category}}</h4>
+                </div>
+            </a>
             <div class="stream-actions">
                 <button *ngIf="!subscribed" class="unsub" (click)="subscribe()">Отслеживать</button>
                 <button *ngIf="subscribed" class="sub" (click)="unsubscribe()">Отписаться</button>

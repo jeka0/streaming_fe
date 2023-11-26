@@ -10,7 +10,7 @@
           placeholder="Login"
           formControlName="login"
         />
-        <mat-error *ngIf="formGroup.controls['login'].invalid">
+        <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
             Login is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -26,8 +26,11 @@
         <mat-icon matSuffix (click)="togglePasswordVisibility()">
           {{ showPassword ? 'visibility_off' : 'visibility' }}
         </mat-icon>
-        <mat-error *ngIf="formGroup.controls['password'].invalid">
+        <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
           Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls['password'].hasError('registration')">
+          This login is already in use by another account
         </mat-error>
       </mat-form-field>
   

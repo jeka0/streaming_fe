@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { SocketService } from 'src/app/shared/services/socket.service';
 import { IMessage } from '../../interfaces/message.interface';
 import { MessageService } from '../../services/message.service';
@@ -11,6 +11,7 @@ import { Subject, mergeMap } from 'rxjs';
 })
 export class ChatComponent {
     @Input() obsId!: Subject<Number>;
+    @ViewChild('targetElement') targetElement!: ElementRef;
     id!: Number;
     messageList: IMessage[] = [];
     message: String = "";
@@ -20,7 +21,11 @@ export class ChatComponent {
       private messageService: MessageService,
     ){
       socketService.socket.on("message", (message)=>{
-        this.messageList.push(message);
+        if(this.id == message.chat.id){
+          this.messageList.push(message);
+          const element = this.targetElement.nativeElement;
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       })
     }
 

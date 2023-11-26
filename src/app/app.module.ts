@@ -25,6 +25,8 @@ import { StreamPreviewComponent } from './shared/components/stream-preview/strea
 import { UserPreviewComponent } from './shared/components/user-preview/user-preview.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { ImageTemplateComponent } from './shared/components/image-template/image-template.component';
+import { UserComponent } from './pages/user/user.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ImageTemplateComponent } from './shared/components/image-template/image
     StreamPreviewComponent,
     UserPreviewComponent,
     UserSettingsComponent,
-    ImageTemplateComponent
+    ImageTemplateComponent,
+    UserComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

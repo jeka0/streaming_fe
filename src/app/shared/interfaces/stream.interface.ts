@@ -8,4 +8,5 @@ export interface IStream{
     end_time?: Date;
     viewer_count: Number;
     user: IUser;
+    recording_file: String;
 }

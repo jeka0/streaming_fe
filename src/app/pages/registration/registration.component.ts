@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit  {
   register() {
     this.authService.register(this.formGroup.value).subscribe({
       next: () => this.router.navigateByUrl('/'),
-      error: (err) => console.error(err),
+      error: (err) => this.formGroup.controls['password'].setErrors({'registration': true}),
     });
   }
 

@@ -1,7 +1,7 @@
 <div class="home-background">
     <div class="stream-list">
         <ng-container *ngFor="let stream of streams">
-            <app-stream-preview *ngIf="stream" [stream]="stream" ></app-stream-preview>
+            <app-stream-preview *ngIf="stream" [live]="true" [stream]="stream" ></app-stream-preview>
         </ng-container>
     </div>
 </div>

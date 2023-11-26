@@ -4,10 +4,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { NotAuthGuard } from './shared/guards/not-auth.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { LiveGuard } from './shared/guards/live.guard';
+import { HasUserGuard } from './shared/guards/has-user.guard';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { StreamComponent } from './pages/stream/stream.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { UserComponent } from './pages/user/user.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 const routes: Routes = [
   {
@@ -37,9 +41,24 @@ const routes: Routes = [
         component: UserSettingsComponent,
       },
       {
+        path: 'error404',
+        component: Page404Component
+      },
+      {
         path: ':name',
+        canActivate: [HasUserGuard],
+        component: UserComponent,
+      },
+      {
+        path: ':name/live',
+        canActivate: [HasUserGuard, LiveGuard],
         component: StreamComponent,
-      }
+      },
+      {
+        path: ':name/:video',
+        canActivate: [HasUserGuard],
+        component: StreamComponent,
+      },
     ]
   },
 ];

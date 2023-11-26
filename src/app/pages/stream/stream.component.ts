@@ -16,6 +16,9 @@ export class StreamComponent {
   chatId: Subject<Number>= new Subject<Number>();
   subscribed: Boolean = false;
   image: BehaviorSubject<string | undefined>;
+  videoName?: string;
+  videoUrl?: string;
+
 
   constructor(
     private userService: UserService,
@@ -28,11 +31,14 @@ export class StreamComponent {
   ngOnInit(){
     this.route.params.pipe(
       mergeMap((params)=>{
+        this.videoName = params['video'];
+        if(this.videoName)this.videoUrl = `${this.videoName}.mp4`
         return this.userService.getByLogin(params['name']);
       }),
       mergeMap((user)=>{
         this.streamKey.next(user.streamKey);
         this.chatId.next(user.chat.id);
+        if(this.videoName)return this.streamService.getStreamByRecording(this.videoName || "");else
         return this.streamService.getLiveStream(user.streamKey);
       }),
       mergeMap((stream)=>{ 
