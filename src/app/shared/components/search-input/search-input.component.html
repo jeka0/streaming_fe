@@ -1,0 +1,21 @@
+<div>
+    <div class="search-input">
+        <div #menuB  [matMenuTriggerFor]="menu"></div>
+        <input [(ngModel)]="searchValue" type="text" placeholder="Search">
+        <button [disabled]="searchValue ==''" mat-icon-button class="search-but" (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <mat-menu class="search-menu" #menu="matMenu" class="customize" >
+        <div class="menu-cont">
+            <ng-container *ngIf="this.searchList.length == 0">
+                <h3>Результат не найден</h3>
+            </ng-container>
+            <ng-container *ngIf="this.searchList.length != 0">
+                <ng-container *ngFor="let user of searchList">
+                    <app-user-preview *ngIf="user" [user]="user"></app-user-preview>
+                </ng-container>
+            </ng-container>
+        </div>
+    </mat-menu>
+</div>

@@ -27,6 +27,7 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { ImageTemplateComponent } from './shared/components/image-template/image-template.component';
 import { UserComponent } from './pages/user/user.component';
 import { Page404Component } from './pages/page404/page404.component';
+import { SearchInputComponent } from './shared/components/search-input/search-input.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { Page404Component } from './pages/page404/page404.component';
     UserSettingsComponent,
     ImageTemplateComponent,
     UserComponent,
-    Page404Component
+    Page404Component,
+    SearchInputComponent
   ],
   imports: [
     BrowserModule,

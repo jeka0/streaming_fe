@@ -3,7 +3,9 @@
       <a routerLink="/">
         <h2>Streaming</h2>
       </a>
-      
+      <div class="wrapper-center">
+        <app-search-input></app-search-input>
+      </div>
       <div class="wrapper-actions">
         <div class="wrapper-user" *ngIf="profile">
             <a [routerLink]="profile.login">
