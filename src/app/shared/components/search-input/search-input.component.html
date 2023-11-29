@@ -1,7 +1,7 @@
 <div>
     <div class="search-input">
         <div #menuB  [matMenuTriggerFor]="menu"></div>
-        <input [(ngModel)]="searchValue" type="text" placeholder="Search">
+        <input [(ngModel)]="searchValue" type="text" placeholder="Search" (keydown.enter)="search()" (input)="closeMenu()">
         <button [disabled]="searchValue ==''" mat-icon-button class="search-but" (click)="search()">
             <mat-icon>search</mat-icon>
         </button>

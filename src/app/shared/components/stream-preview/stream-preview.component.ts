@@ -30,6 +30,5 @@ export class StreamPreviewComponent {
       this.streamUrl = `${environment.apiURL}/thumbnail/${name}.png`
       this.routerLink = name;
     }
-    console.log(this.live)
   }
 }

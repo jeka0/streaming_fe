@@ -2,6 +2,7 @@
     width: 350px;
     margin-left: 30px;
     margin-top: 20px;
+    position: relative;
 }
 
 .stream-preview img{
@@ -39,6 +40,15 @@ h4, h5, strong{
     word-break: break-all;
     word-break: break-word;
     margin: 0;
+}
+
+.live{
+    width: 32px;
+    background-color: rgb(212, 0, 0);
+    color: white;
+    position: absolute;
+    right: 6px;
+    top: 16px
 }
 
 h4{

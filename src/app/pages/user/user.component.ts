@@ -14,12 +14,13 @@ import { IStream } from 'src/app/shared/interfaces/stream.interface';
 export class UserComponent {
   user?:IUser;
   image!: BehaviorSubject<string | undefined>;
+  bUser: BehaviorSubject<IUser | undefined> = new BehaviorSubject<IUser| undefined>(undefined);
   streams: IStream[] = [];
 
   constructor(
     private userService: UserService,
     private streamService: StreamService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ){
     this.image = new BehaviorSubject<string | undefined>(undefined);
   }
@@ -29,11 +30,12 @@ export class UserComponent {
       switchMap((params)=>this.userService.getByLogin(params['name'])),
       switchMap((user)=>{
         this.user = user;
+        this.bUser.next(user);
         this.image.next(user.image);
         return this.streamService.getUserStreams(user.id);
       })
     ).subscribe({
-      next:(streams)=>{this.streams = streams; console.log(this.streams)},
+      next:(streams)=>{this.streams = streams;},
       error:err=>console.log(err)
     })
   }

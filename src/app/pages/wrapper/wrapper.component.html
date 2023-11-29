@@ -40,6 +40,9 @@
         <div class="wrapper-menu"> 
             <h2>Отслеживаемые каналы</h2>
             <hr/>
+            <div *ngIf="list.length === 0" class="message">
+                <h3>Список пуст!</h3>
+            </div>
             <ng-container *ngFor="let user of list">
                 <app-user-preview *ngIf="user" [user]="user"></app-user-preview>
             </ng-container>

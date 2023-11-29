@@ -77,12 +77,13 @@ export class UserSettingsComponent {
   updateUser() {
     const data = this.formGroup!.value;
     delete data.avatar;
+    data.password = data.password.trim()
     if(!data.password) delete data.password;
     this.userService.updateCurrent(data).pipe(
       mergeMap(()=>this.userService.getCurrent())
     ).subscribe({
       next: () => {},
-      error: (err) => console.error(err),
+      error: (err) => {this.formGroup!.controls['login'].setErrors({'login': true})},
     });
   }
 

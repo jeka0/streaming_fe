@@ -28,6 +28,7 @@ import { ImageTemplateComponent } from './shared/components/image-template/image
 import { UserComponent } from './pages/user/user.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SearchInputComponent } from './shared/components/search-input/search-input.component';
+import { FollowingButtonComponent } from './shared/components/following-button/following-button.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { SearchInputComponent } from './shared/components/search-input/search-in
     ImageTemplateComponent,
     UserComponent,
     Page404Component,
-    SearchInputComponent
+    SearchInputComponent,
+    FollowingButtonComponent
   ],
   imports: [
     BrowserModule,

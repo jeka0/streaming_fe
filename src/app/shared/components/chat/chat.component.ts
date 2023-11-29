@@ -22,9 +22,8 @@ export class ChatComponent {
     ){
       socketService.socket.on("message", (message)=>{
         if(this.id == message.chat.id){
-          this.messageList.push(message);
-          const element = this.targetElement.nativeElement;
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          this.messageList = [message, ...this.messageList];
+          this.targetElement.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       })
     }
@@ -37,13 +36,15 @@ export class ChatComponent {
           return this.messageService.getAllByChat(id);
         })
       ).subscribe({
-        next: (messages)=> this.messageList.push(...messages.reverse()),
+        next: (messages)=> {
+          this.messageList.push(...messages);
+        },
         error: (err)=>console.log(err)
       })
     }
 
     sendMessage(){
-      this.socketService.sendMessage(this.id, this.message);
+      if(this.message.trim() !='')this.socketService.sendMessage(this.id, this.message);
       this.message = "";
     }
 

@@ -1,0 +1,2 @@
+<button *ngIf="show && !subscribed" class="unsub" (click)="subscribe()">Отслеживать</button>
+<button *ngIf="show && subscribed" class="sub" (click)="unsubscribe()">Отписаться</button>

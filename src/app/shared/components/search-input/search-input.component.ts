@@ -10,6 +10,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class SearchInputComponent {
   @ViewChild('menuB') manuButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   searchValue: string ="";
   searchList: IUser[] = [];
 
@@ -17,11 +18,14 @@ export class SearchInputComponent {
     private userService: UserService
   ){}
 
+  closeMenu() {
+    this.trigger.closeMenu();
+  }
+
   search(){
     if(this.searchValue !="")this.userService.search({name: this.searchValue}).subscribe({
       next:users=>{
         this.searchList = users;
-        console.log(this.manuButton)
         this.manuButton.nativeElement.click();
        },
       error:err=>console.log(err)

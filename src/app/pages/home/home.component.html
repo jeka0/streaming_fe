@@ -1,5 +1,9 @@
 <div class="home-background">
+    <h1>Трансляции в прямом эфире:</h1>
     <div class="stream-list">
+        <div *ngIf="streams.length === 0" class="message">
+            <h1>На данный момент трансляции отсутствуют!</h1>
+        </div>
         <ng-container *ngFor="let stream of streams">
             <app-stream-preview *ngIf="stream" [live]="true" [stream]="stream" ></app-stream-preview>
         </ng-container>

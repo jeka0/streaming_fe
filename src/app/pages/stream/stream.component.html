@@ -11,8 +11,7 @@
                 </div>
             </a>
             <div class="stream-actions">
-                <button *ngIf="!subscribed" class="unsub" (click)="subscribe()">Отслеживать</button>
-                <button *ngIf="subscribed" class="sub" (click)="unsubscribe()">Отписаться</button>
+                <app-following-button [user]="user"></app-following-button>
             </div>
         </div>
     </div>

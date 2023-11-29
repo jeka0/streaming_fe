@@ -10,6 +10,7 @@
           placeholder="login"
           formControlName="login"
           (input)="change()"
+          (keydown.enter)="!formGroup.invalid && login()"
         />
         <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
           Login is <strong>required</strong>
@@ -27,6 +28,7 @@
           placeholder="password"
           formControlName="password"
           (input)="change()"
+          (keydown.enter)="!formGroup.invalid && login()"
         />
         <mat-icon matSuffix (click)="togglePasswordVisibility()">
           {{ showPassword ? 'visibility_off' : 'visibility' }}

@@ -5,6 +5,24 @@
     overflow-y: auto;
 }
 
+.home-background h1{
+    color: white;
+    margin: 0;
+    margin-top: 20px;
+    margin-left: 20px
+}
+
+.message{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.message h1{
+    color: white;
+}
+
 .stream-list{
     display: flex;
     flex-direction: row;

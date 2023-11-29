@@ -2,9 +2,24 @@
     <div class="user-info" *ngIf="this.user">
         <app-image-template class="user" [name]="this.image"></app-image-template>
         <h1>{{user.login}}</h1>
+        <div class="status">
+            <div *ngIf="user.status" class="live">LIVE</div>
+        </div>
+        <div class="user-action">
+            <a *ngIf="user.status" routerLink="./live">
+                <button class = 'live-but'>Go to live</button>
+            </a>
+            <div class="sub-but">
+                <app-following-button [user]="bUser"></app-following-button>
+            </div>
+        </div>
     </div>
     <hr/>
+    <h1>Записи трансляций:</h1>
     <div class="stream-list">
+        <div *ngIf="streams.length === 0" class="message">
+            <h1>Записи трансляций отсутствуют!</h1>
+        </div>
         <ng-container *ngFor="let stream of streams">
             <app-stream-preview *ngIf="stream" [live]="false" [stream]="stream" ></app-stream-preview>
         </ng-container>

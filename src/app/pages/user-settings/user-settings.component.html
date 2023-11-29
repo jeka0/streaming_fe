@@ -37,9 +37,12 @@
                   placeholder="Login"
                   formControlName="login"
                 />
-                <mat-error *ngIf="formGroup.controls['login'].invalid">
+                <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
                   Login is <strong>required</strong>
                 </mat-error>
+                <mat-error *ngIf="formGroup.controls['login'].hasError('login')">
+                    This login is already in use by another account
+                  </mat-error>
               </mat-form-field>
         </div>
         <div class="settings-box login-box">
