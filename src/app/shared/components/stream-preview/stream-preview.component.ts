@@ -12,6 +12,7 @@ export class StreamPreviewComponent {
   @Input() stream!: IStream;
   @Input() live!: Boolean;
   streamUrl: String = "";
+  errUrl: String = 'assets/Img/stream_image.jpg';
   image: BehaviorSubject<string | undefined>;
   routerLink: string='';
 
@@ -19,12 +20,16 @@ export class StreamPreviewComponent {
     this.image = new BehaviorSubject<string | undefined>(undefined);
   }
 
+  error(){
+    this.streamUrl = this.errUrl;
+  }
+
   ngOnInit(){
     this.image.next(this.stream.user.image)
     if(this.live) {
       this.streamUrl = `${environment.apiURL}/thumbnail/${this.stream.user.streamKey}.png`;
       this.routerLink = this.stream.user.login + '/live';
-  } 
+    } 
     else {
       const name = this.stream.recording_file.split('.')[0];
       this.streamUrl = `${environment.apiURL}/thumbnail/${name}.png`

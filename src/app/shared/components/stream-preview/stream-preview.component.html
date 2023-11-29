@@ -1,7 +1,7 @@
 <div class="stream-preview">
     <a [routerLink]="routerLink">
         <div *ngIf="live" class="live">LIVE</div>
-        <img [src]="streamUrl"/>
+        <img [src]="streamUrl" (error)="error()"/>
         <div class="stream-preview-user">
             <app-image-template [name]="this.image"></app-image-template>
             <div class="stream-info">
