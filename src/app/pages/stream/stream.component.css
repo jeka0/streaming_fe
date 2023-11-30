@@ -54,6 +54,13 @@ a {
     margin-left: 10px;
 }
 
+.viewer_count h3{
+    color: red;
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
 .stream-actions{
     flex-grow: 1;
 }

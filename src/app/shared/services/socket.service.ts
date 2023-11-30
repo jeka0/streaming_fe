@@ -37,11 +37,11 @@ export class SocketService {
     this.socket.emit("delete", {chatId, id});
   }
       
-  joinTo(chatId: Number){
+  joinTo(chatId: Number | string){
     this.socket.emit("join", chatId);
   }
 
-  leaveFrom(chatId: Number){
+  leaveFrom(chatId: Number | string){
     this.socket.emit("leave", chatId);
   }
 
