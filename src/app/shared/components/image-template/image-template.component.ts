@@ -16,6 +16,7 @@ export class ImageTemplateComponent {
     this.name.subscribe({
       next:(name)=>{
         if(name)this.avatar= this.url + name;
+        else this.avatar = 'assets/Img/avatar.jpg';
       },
       error:err=>console.log(err)
     })
