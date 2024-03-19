@@ -8,6 +8,7 @@ import { IUser } from '../interfaces/user.interface';
 })
 export class SocketService {
   socket: Socket;
+  intervalID?: NodeJS.Timeout;
 
   constructor(private auth: AuthService) { 
     this.socket = io("http://localhost:3021", {
@@ -18,11 +19,16 @@ export class SocketService {
     });
     this.socket.on('connect', ()=>{
         console.log("User connected");
+        if(this.intervalID) clearInterval(this.intervalID);
     });
 
     this.socket.on('error', err=>{
         console.log(err);
     });
+
+    this.socket.on('disconnect',()=>{
+      if(this.auth.isAuth()) this.connect();
+    })
   }
 
   sendMessage(chatId: Number, message: String){
@@ -54,7 +60,7 @@ export class SocketService {
   }
 
   connect(){
-    this.socket.connect();
+    this.intervalID = setInterval(()=>this.socket.connect(), 2000);
   }
 
   disconnect(){
