@@ -27,7 +27,7 @@ export class StreamPreviewComponent {
   ngOnInit(){
     this.image.next(this.stream.user.image)
     if(this.live) {
-      this.streamUrl = `${environment.apiURL}/thumbnail/${this.stream.user.streamKey}.png`;
+      this.streamUrl = `${environment.apiURL}/thumbnail/${this.stream.user.login}.png`;
       this.routerLink = this.stream.user.login + '/live';
     } 
     else {

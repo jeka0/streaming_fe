@@ -1,6 +1,6 @@
 <div class="stream-container">
     <div class="stream-content">
-        <app-stream-player [streamKey]="streamKey" [video]="videoUrl"></app-stream-player>
+        <app-stream-player [name]="streamName" [video]="videoUrl"></app-stream-player>
         <div class="stream-info" *ngIf="stream">
             <a class="stream-link" routerLink="../">
                 <app-image-template [name]="this.image"></app-image-template>

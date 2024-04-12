@@ -17,6 +17,7 @@ export class UserSettingsComponent {
   formGroup2?: FormGroup;
   image: BehaviorSubject<string | undefined>;
   settings: Subject<ISettings>
+  streamKey?: String;
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,9 @@ export class UserSettingsComponent {
       next: profile=>{
         this.profile=profile;
         if(this.profile?.image)this.image.next(this.profile.image);
+        if(this.profile?.streamKey){
+          this.streamKey = `${this.profile.login}?secret=${this.profile.streamKey}`;
+      }
         this.formGroup = this.fb.group({
           login: this.fb.control<string | undefined>(
             profile?.login,

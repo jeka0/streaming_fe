@@ -17,16 +17,16 @@ export class HomeComponent {
     this.streamService.getLiveStreams()
     .pipe(
       map((streams)=>{
-        let keys: String[] = [];
+        let names: String[] = [];
         for(let key in streams['live']){
-          keys.push(key);
+          names.push(key);
         }
-        return keys;
+        return names;
     }),
       mergeAll(),
-        mergeMap((streamKey) => {
-          if (streamKey) {
-            return this.streamService.getLiveStream(streamKey);
+        mergeMap((name) => {
+          if (name) {
+            return this.streamService.getLiveStream(name);
           }
           return of(undefined);
         }),

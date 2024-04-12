@@ -14,14 +14,14 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
 })
 export class StreamComponent {
   stream!: IStream;
-  streamKey: Subject<string> = new Subject<string>();
+  streamName: Subject<string> = new Subject<string>();
   chatId: Subject<Number>= new Subject<Number>();
   user: BehaviorSubject<IUser  | undefined> = new BehaviorSubject<IUser | undefined>(undefined);
   image: BehaviorSubject<string | undefined>;
   videoName?: string;
   videoUrl?: string;
-  key?: string;
-  viewer_count: Number = 0;
+  name?: string;
+  viewer_count: number = 0;
 
 
   constructor(
@@ -35,7 +35,8 @@ export class StreamComponent {
 
   ngOnInit(){
     this.socketService.socket.on('viewer_count',({id, viewer_count})=>{
-      if(this.stream.id == id){
+      if(this.stream?.id === id){
+        console.log("+")
         this.viewer_count = viewer_count;
       }
     })
@@ -46,18 +47,18 @@ export class StreamComponent {
         return this.userService.getByLogin(params['name']);
       }),
       mergeMap((user)=>{
+        this.socketService.joinTo(`${user.login}/live`);
         this.user.next(user);
-        this.streamKey.next(user.streamKey);
-        this.key = user.streamKey;
+        this.streamName.next(user.login);
+        this.name = user.login;
         this.chatId.next(user.chat.id);
         if(this.videoName)return this.streamService.getStreamByRecording(this.videoName || "");
-        console.log(`${this.streamKey}/live`)
-        this.socketService.joinTo(`${user.streamKey}/live`);
-        return this.streamService.getLiveStream(user.streamKey);
+        return this.streamService.getLiveStream(user.login);
       }),
     ).subscribe({
       next:(stream)=>{ 
         this.stream = stream;
+        this.viewer_count = stream.viewer_count as number;
         this.image.next(this.stream.user.image)
       },
       error: (err)=>console.log(err)
@@ -65,8 +66,8 @@ export class StreamComponent {
   }
 
   ngOnDestroy(){
-    if(this.key && !this.videoName){
-      this.socketService.leaveFrom(`${this.key}/live`);
+    if(this.name && !this.videoName){
+      this.socketService.leaveFrom(`${this.name}/live`);
   }
   }
 }
