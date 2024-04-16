@@ -22,6 +22,7 @@ export class WrapperComponent {
     private readonly socketService: SocketService,
     private router: Router,
     ){
+      socketService.init();
       this.image = new BehaviorSubject<string | undefined>(undefined);
       this.userService.getCurrent().pipe(
         switchMap((user)=>{

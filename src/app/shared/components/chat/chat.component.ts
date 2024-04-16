@@ -26,6 +26,14 @@ export class ChatComponent {
           this.targetElement.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       })
+      socketService.socket.on("delete", ({chatId, id})=>{
+        if(this.id === chatId){
+          const index = this.messageList.findIndex(message=>message.id===id);
+          if (index > -1) {
+            this.messageList.splice(index, 1);
+          }
+        }
+      })
     }
 
     ngOnInit(){

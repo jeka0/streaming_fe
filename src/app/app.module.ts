@@ -29,6 +29,8 @@ import { UserComponent } from './pages/user/user.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { SearchInputComponent } from './shared/components/search-input/search-input.component';
 import { FollowingButtonComponent } from './shared/components/following-button/following-button.component';
+import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -49,7 +51,8 @@ import { FollowingButtonComponent } from './shared/components/following-button/f
     UserComponent,
     Page404Component,
     SearchInputComponent,
-    FollowingButtonComponent
+    FollowingButtonComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { FollowingButtonComponent } from './shared/components/following-button/f
     MatToolbarModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

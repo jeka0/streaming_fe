@@ -5,4 +5,5 @@ export interface IChat {
     name: string;
     type: string;
     users: IUser[];
+    streamer: IUser;
 }

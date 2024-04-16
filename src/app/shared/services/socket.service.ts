@@ -7,27 +7,30 @@ import { IUser } from '../interfaces/user.interface';
   providedIn: 'root'
 })
 export class SocketService {
-  socket: Socket;
+  socket!: Socket;
   intervalID?: NodeJS.Timeout;
 
   constructor(private auth: AuthService) { 
+
+  }
+  init(){
     this.socket = io("http://localhost:3021", {
-            auth: {
-              token: `Bearer ${auth.token}`
-            },
-            autoConnect: false
+      auth: {
+        token: `Bearer ${this.auth.token}`
+      },
+      autoConnect: false
     });
     this.socket.on('connect', ()=>{
-        console.log("User connected");
-        if(this.intervalID) clearInterval(this.intervalID);
+      console.log("User connected");
+      if(this.intervalID) clearInterval(this.intervalID);
     });
 
     this.socket.on('error', err=>{
-        console.log(err);
+      console.log(err);
     });
 
     this.socket.on('disconnect',()=>{
-      if(this.auth.isAuth()) this.connect();
+    if(this.auth.isAuth()) this.connect();
     })
   }
 
