@@ -15,6 +15,10 @@ export class ChatComponent {
     id!: Number;
     messageList: IMessage[] = [];
     message: String = "";
+    info?: { type: string, message: string };
+    time: number = 5000;
+    timeout?: NodeJS.Timeout;
+
 
     constructor(
       private socketService: SocketService,
@@ -34,6 +38,20 @@ export class ChatComponent {
           }
         }
       })
+      socketService.socket.on("info", ({chatId, message})=>{
+        if(this.id === chatId){
+          this.info = {type:"info",message};
+          if(this.timeout) clearTimeout(this.timeout);
+          this.timeout = setTimeout(()=>this.closeInfo(), this.time);
+        }
+      })
+      socketService.socket.on("fail", ({chatId, message})=>{
+        if(this.id === chatId){
+          this.info = {type:"fail",message};
+          if(this.timeout) clearTimeout(this.timeout);
+          this.timeout = setTimeout(()=>this.closeInfo(), this.time);
+        }
+      })
     }
 
     ngOnInit(){
@@ -49,6 +67,11 @@ export class ChatComponent {
         },
         error: (err)=>console.log(err)
       })
+    }
+
+    closeInfo(){
+      this.info = undefined;
+      this.timeout= undefined;
     }
 
     sendMessage(){

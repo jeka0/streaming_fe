@@ -5,6 +5,10 @@
             <app-message [message]="message"></app-message>
         </div>
     </div>
+    <div *ngIf="info"  [ngClass]="info.type" class="notification">
+        <label>{{info.message}}</label> 
+       <button class="close" mat-button (click)="closeInfo()">X</button>
+    </div>
     <div class="chat-action">
         <input [(ngModel)]="message" (keydown.enter)="sendMessage()"/>
         <button mat-button #send (click)="sendMessage()">Send</button>

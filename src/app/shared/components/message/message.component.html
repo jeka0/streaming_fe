@@ -3,7 +3,7 @@
         <h3 *ngIf="message"><span>{{message.user.login}}</span>: {{ message.message }}</h3>
     </div>
     <div *ngIf="isModer()" class="action">
-        <button class="but" (click)="openDialog()">
+        <button mat-button class="but" (click)="openDialog()">
             <mat-icon class="icon">delete</mat-icon>
         </button>
     </div>

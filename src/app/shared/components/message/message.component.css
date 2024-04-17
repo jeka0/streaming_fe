@@ -17,25 +17,21 @@ h3{
 
 .but{
     border: none;
-    border-radius: 16px;
-    padding: 0;
+    padding: 2px;
     margin: 0;
-    width: 20px;
+    min-width: unset !important;
+    width: 20px !important;
     height: 20px;
     margin-right: 5px;
     font-size: 12px;
-    background-color: rgba(240, 248, 255, 0);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.but:hover {
-    background-color: rgba(86, 86, 86, 0.29);
-}
-
-.but:active{
-    background-color: rgba(0, 0, 0, 0.181);
+    
+    .mat-mdc-button-touch-target {
+        width: 20px !important;
+        height: 20px !important;
+     }
 }
 
 span{
