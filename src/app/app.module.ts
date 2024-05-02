@@ -31,6 +31,8 @@ import { SearchInputComponent } from './shared/components/search-input/search-in
 import { FollowingButtonComponent } from './shared/components/following-button/following-button.component';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { WrapperSettingsComponent } from './pages/wrapper-settings/wrapper-settings.component';
+import { StreamSettingsComponent } from './pages/stream-settings/stream-settings.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     Page404Component,
     SearchInputComponent,
     FollowingButtonComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    WrapperSettingsComponent,
+    StreamSettingsComponent
   ],
   imports: [
     BrowserModule,

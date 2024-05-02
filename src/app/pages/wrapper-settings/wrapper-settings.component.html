@@ -1,0 +1,15 @@
+<div class="settings-background">
+    <h1>Настройки</h1>
+    <div class="navigation">
+        <ng-container *ngFor="let nav of navList;">
+            <h2>
+                <a [ngClass]="nav.class" [routerLink]="nav.link">
+                    {{nav.title}}
+                </a>
+            </h2>
+        </ng-container>
+    </div>
+    <div class="settings">
+        <router-outlet></router-outlet>
+    </div>
+</div>

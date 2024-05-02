@@ -9,37 +9,10 @@ h3{
     margin: 0;
 }
 
-mat-form-field, mat-label, .mat-primary input{
-    color: white;
-}
-  
-.mat-primary input::placeholder {
-    color: rgba(255, 255, 255, 0.425);
-}
-
-.mat-input{
+.info{
+    margin: 0;
     flex: 1;
-    max-width: 700px;
-    min-width: 100px;
-    margin-right: 10px;
 }
-
-.info-block{ 
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-}
-
-.image-active{
-    padding: 0 0 20px 0;
-}
-
-:host ::ng-deep img{
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-  }
 
 .settings-box{
     display: flex;
@@ -54,14 +27,6 @@ mat-form-field, mat-label, .mat-primary input{
     width: 90%;
 }
 
-.settings{
-    display: flex;
-}
-
-.info{
-    flex-grow: 1;
-}
-
 .login-box{
     padding: 16px 0 0 0;
     margin-top: 0px;
@@ -72,6 +37,28 @@ mat-form-field, mat-label, .mat-primary input{
     margin-top: 30px;   
 }
 
+.info-block{ 
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+mat-form-field, mat-label, .mat-primary input{
+    color: white;
+}
+
+.mat-input{
+    flex: 1;
+    max-width: 700px;
+    min-width: 100px;
+    margin-right: 10px;
+}
+  
+.mat-primary input::placeholder {
+    color: rgba(255, 255, 255, 0.425);
+}
+
 .box-active{
     flex-direction: row-reverse;
     padding: 10px 0 10px 0;
@@ -80,6 +67,11 @@ mat-form-field, mat-label, .mat-primary input{
 
 #save{
     margin-right: 10px;
+}
+
+#generate{
+    margin-left: 10px;
+    margin-bottom: 16px;
 }
 
 .mat-button.mat-custom {
@@ -101,5 +93,8 @@ mat-form-field, mat-label, .mat-primary input{
 
 ::ng-deep .mat-form-field-appearance-outline .mdc-text-field--outlined{
     background-color: #7a7a7a34;
-    border-radius: 5px;
+}
+
+input[readonly]{
+    opacity: .4;
 }

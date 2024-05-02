@@ -1,0 +1,68 @@
+<div class="info" *ngIf="formGroup" [formGroup]="formGroup">
+    <h2>Настройки трансляции</h2>
+    <div class="settings-box login-box">
+        <div class="info-block">
+            <h3>Ключ трансляции</h3>
+        </div>
+        <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Stream key</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Stream key"
+              [value]="this.streamKey"
+              readonly
+            />
+          </mat-form-field>
+          <button
+          mat-button
+          class="mat-button"
+          color="custom"
+          id="generate"
+          (click)="generateNewKey()"
+      >   
+      Сгенерировать новый ключ</button>
+    </div>
+    <div class="settings-box login-box first-box">
+        <div class="info-block">
+            <h3>Название трансляции</h3>
+        </div>
+        <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Stream title</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Stream title"
+              formControlName="stream_title"
+            />
+          </mat-form-field>
+    </div>
+    <div class="settings-box login-box">
+        <div class="info-block">
+            <h3>Категория трансляции</h3>
+        </div>
+        <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Category</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Category"
+              formControlName="category"
+            />
+            <mat-error *ngIf="formGroup.controls['category'].invalid">
+                Category is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+    </div>
+    <div class="settings-box login-box box-active">
+        <button
+            mat-button
+            class="mat-button"
+            color="custom"
+            id="save"
+            [disabled]="formGroup.invalid || !this.formGroup.dirty"
+            (click)="updateSettings()"
+        >   
+        Сохранить изменения</button>
+    </div>
+</div>

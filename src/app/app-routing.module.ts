@@ -12,6 +12,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserComponent } from './pages/user/user.component';
 import { Page404Component } from './pages/page404/page404.component';
+import { WrapperSettingsComponent } from './pages/wrapper-settings/wrapper-settings.component';
+import { StreamSettingsComponent } from './pages/stream-settings/stream-settings.component'; 
 
 const routes: Routes = [
   {
@@ -37,8 +39,18 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'user-settings',
-        component: UserSettingsComponent,
+        path: 'settings',
+        component: WrapperSettingsComponent,
+        children:[
+          {
+            path: '',
+            component: UserSettingsComponent,
+          },
+          {
+            path: 'stream',
+            component: StreamSettingsComponent,
+          },
+        ]
       },
       {
         path: 'error404',

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { UserService } from 'src/app/shared/services/user.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { mergeMap, BehaviorSubject, Subject } from 'rxjs';
-import { ISettings } from 'src/app/shared/interfaces/settings.interface';
+import { mergeMap, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { RoutesService } from 'src/app/shared/services/routes.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -14,28 +14,23 @@ import { ISettings } from 'src/app/shared/interfaces/settings.interface';
 export class UserSettingsComponent {
   profile?: IUser;
   formGroup?: FormGroup;
-  formGroup2?: FormGroup;
   image: BehaviorSubject<string | undefined>;
-  settings: Subject<ISettings>
-  streamKey?: String;
 
   constructor(
     private userService: UserService,
-    private settingsService: SettingsService,
     private readonly fb: FormBuilder,
+    private router: Router,
+    private routeService: RoutesService
   ){
     this.image = new BehaviorSubject<string | undefined>(undefined);
-    this.settings = new Subject<ISettings>;
   }
 
   ngOnInit(){
+    this.routeService.route.next(this.router.url);
     this.userService.profile.subscribe({
       next: profile=>{
         this.profile=profile;
         if(this.profile?.image)this.image.next(this.profile.image);
-        if(this.profile?.streamKey){
-          this.streamKey = `${this.profile.login}?secret=${this.profile.streamKey}`;
-      }
         this.formGroup = this.fb.group({
           login: this.fb.control<string | undefined>(
             profile?.login,
@@ -49,33 +44,6 @@ export class UserSettingsComponent {
       },
       error: err=>console.log(err)
     })
-    this.settings.subscribe({
-      next:(settings)=>{
-        this.formGroup2 = this.fb.group({
-          stream_title: this.fb.control<string | undefined>(
-            settings.stream_title
-          ),
-          category:this.fb.control<string>(
-            settings.category,
-            Validators.required
-          ),
-        })
-      },
-      error:err=>console.log(err)
-    })
-    this.settingsService.getSettings().subscribe({
-      next:(settings)=>this.settings.next(settings),
-      error:err=>console.log(err)
-    })
-  }
-
-  generateNewKey(){
-    this.userService.generateNewStreamKey().pipe(
-      mergeMap(()=>this.userService.getCurrent())
-    ).subscribe({
-      next: () => {},
-      error: (err) => console.error(err),
-    })
   }
 
   updateUser() {
@@ -88,15 +56,6 @@ export class UserSettingsComponent {
     ).subscribe({
       next: () => {},
       error: (err) => {this.formGroup!.controls['login'].setErrors({'login': true})},
-    });
-  }
-
-  updateSettings(){
-    this.settingsService.updateSettings(this.formGroup2!.value).pipe(
-      mergeMap(()=>this.settingsService.getSettings())
-    ).subscribe({
-      next:(settings)=>this.settings.next(settings),
-      error:err=>console.log(err)
     });
   }
 
