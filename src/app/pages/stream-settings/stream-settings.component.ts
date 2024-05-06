@@ -77,4 +77,8 @@ export class StreamSettingsComponent {
       error:err=>console.log(err)
     });
   }
+
+  ngOnDestroy(){
+    this.routeService.route.next(undefined);
+  }
 }

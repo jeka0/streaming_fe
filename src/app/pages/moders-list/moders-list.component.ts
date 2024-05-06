@@ -49,8 +49,6 @@ export class ModersListComponent {
         next: moders=>{
           this.moders=moders;
           if(moders) this.dataSource.data = moders;
-
-          console.log(this.moders)
         },
         error: err=>console.log(err)
       })
@@ -83,5 +81,9 @@ export class ModersListComponent {
       },
       error: (err)=>console.log(err)
     })
+  }
+
+  ngOnDestroy(){
+    this.routeService.route.next(undefined);
   }
 }

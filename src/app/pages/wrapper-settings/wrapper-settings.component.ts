@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RoutesService } from 'src/app/shared/services/routes.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 interface Navigation {
   title:string,
@@ -15,6 +16,7 @@ interface Navigation {
 })
 export class WrapperSettingsComponent {
   navList!: Array<Navigation>;
+  subscription!: Subscription;
 
   constructor(
     private routeService: RoutesService,
@@ -28,7 +30,7 @@ export class WrapperSettingsComponent {
   }
 
   ngOnInit(){
-    this.routeService.route.subscribe({
+    this.subscription = this.routeService.route.subscribe({
       next: routValue => {
         if(routValue){
           const routeNames = routValue.split("/");
@@ -46,5 +48,9 @@ export class WrapperSettingsComponent {
       },
       error: err => console.error(err)
     })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

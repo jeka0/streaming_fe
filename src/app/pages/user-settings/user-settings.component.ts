@@ -75,4 +75,7 @@ export class UserSettingsComponent {
     }
   }
 
+  ngOnDestroy(){
+    this.routeService.route.next(undefined);
+  }
 }
