@@ -36,6 +36,7 @@ import { StreamSettingsComponent } from './pages/stream-settings/stream-settings
 import { ModersListComponent } from './pages/moders-list/moders-list.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { AddModerComponent } from './shared/components/add-moder/add-moder.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ConfirmationDialogComponent,
     WrapperSettingsComponent,
     StreamSettingsComponent,
-    ModersListComponent
+    ModersListComponent,
+    AddModerComponent
   ],
   imports: [
     BrowserModule,

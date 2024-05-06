@@ -40,21 +40,6 @@ export class ModersListComponent {
       },
       error: err=>console.log(err)
     })
-    /*.pipe(
-      mergeMap(profile=>{
-        this.profile=profile;
-        return this.profile? this.chatService.getChatModers(this.profile?.chat.id):of(undefined);
-      })
-    )
-    .subscribe({
-      next: moders=>{
-        this.moders=moders;
-        if(moders) this.dataSource.data = moders;
-
-        console.log(this.moders)
-      },
-      error: err=>console.log(err)
-    })*/
   }
 
   updateModers(){
@@ -99,5 +84,4 @@ export class ModersListComponent {
       error: (err)=>console.log(err)
     })
   }
-
 }

@@ -1,5 +1,6 @@
 <div class="table-area">
     <h2>Список модераторов чата</h2>
+    <app-add-moder (onAddModer)="updateModers()"></app-add-moder>
     <table class="table" mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="login">
             <th mat-header-cell *matHeaderCellDef>Login</th>
