@@ -1,14 +1,22 @@
-.mat-dialog-actions {
+.actions{
+  margin-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 
 .form{
   background-color: rgb(76, 76, 76);
   padding: 20px;
+  max-width: 300px;
 }
 
+.title, .but, h3{
+  color: white;
+  padding: 0;
+  margin: 0;
+}
 
-.title, .but{
-  color: white
+.title{
+  margin-left: 10px;
+  margin-right: 10px;
 }

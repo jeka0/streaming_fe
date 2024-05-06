@@ -1,8 +1,12 @@
 <div class="form">
   <h1 mat-dialog-title class="title">{{ data.message }}</h1>
 
-  <div mat-dialog-actions>
-    <button class="but" mat-button [mat-dialog-close]="true">{{ data.buttonName }}</button>
-    <button class="but" mat-button cdkFocusInitial (click)="onCancelClick()">Cancel</button>
+  <div mat-dialog-actions class="actions">
+    <button class="but" mat-button [mat-dialog-close]="true">
+      <h3>{{ data.buttonName }}</h3>
+    </button>
+    <button class="but" mat-button cdkFocusInitial (click)="onCancelClick()">
+      <h3>Cancel</h3>
+    </button>
   </div>
 </div>

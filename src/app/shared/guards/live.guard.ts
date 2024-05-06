@@ -15,11 +15,11 @@ export class LiveGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Observable<boolean> {
       return this.userService.getByLogin(route.params['name']).pipe(
         map((user)=> {
           console.log(user)
-          if(!user.status) this.router.navigateByUrl(route.params['name']);; 
+          if(!user.status) this.router.navigateByUrl(route.params['name']);
           return !!user.status
         })
       )

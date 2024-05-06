@@ -33,6 +33,9 @@ import { ConfirmationDialogComponent } from './shared/components/confirmation-di
 import { MatDialogModule } from '@angular/material/dialog';
 import { WrapperSettingsComponent } from './pages/wrapper-settings/wrapper-settings.component';
 import { StreamSettingsComponent } from './pages/stream-settings/stream-settings.component';
+import { ModersListComponent } from './pages/moders-list/moders-list.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -56,7 +59,8 @@ import { StreamSettingsComponent } from './pages/stream-settings/stream-settings
     FollowingButtonComponent,
     ConfirmationDialogComponent,
     WrapperSettingsComponent,
-    StreamSettingsComponent
+    StreamSettingsComponent,
+    ModersListComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,9 @@ import { StreamSettingsComponent } from './pages/stream-settings/stream-settings
     MatMenuModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

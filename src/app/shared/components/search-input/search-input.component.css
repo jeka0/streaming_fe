@@ -2,7 +2,8 @@
     color: white;
     border: 1px solid #ffffff3b;
     display: flex;
-    height: 40px;
+    height:4vh;
+    width: 100%;
 }
 
 .search-but{

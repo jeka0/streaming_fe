@@ -14,6 +14,7 @@ import { UserComponent } from './pages/user/user.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { WrapperSettingsComponent } from './pages/wrapper-settings/wrapper-settings.component';
 import { StreamSettingsComponent } from './pages/stream-settings/stream-settings.component'; 
+import { ModersListComponent } from './pages/moders-list/moders-list.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
           {
             path: 'stream',
             component: StreamSettingsComponent,
+          },
+          {
+            path: 'moders',
+            component: ModersListComponent,
           },
         ]
       },

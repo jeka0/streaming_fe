@@ -22,7 +22,8 @@ export class WrapperSettingsComponent {
   ){
     this.navList = [
       {title: "Настройки аккаунта", link:"./", class:"no-selected"},
-      {title: "Настройки трансляции", link:"./stream", class:"no-selected"}
+      {title: "Настройки трансляции", link:"./stream", class:"no-selected"},
+      {title: "Список модераторов", link:"./moders", class:"no-selected"}
     ]
   }
 
