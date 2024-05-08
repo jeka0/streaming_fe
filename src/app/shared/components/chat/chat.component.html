@@ -2,7 +2,7 @@
     <div class="chat-content">
         <div class="target" #targetElement>target</div>
         <div class="chat-message" *ngFor = "let message of messageList">
-            <app-message [message]="message"></app-message>
+            <app-message [message]="message" [chat]="chat"></app-message>
         </div>
     </div>
     <div *ngIf="info"  [ngClass]="info.type" class="notification">
@@ -10,7 +10,14 @@
        <button class="close" mat-button (click)="closeInfo()">X</button>
     </div>
     <div class="chat-action">
-        <input [(ngModel)]="message" (keydown.enter)="sendMessage()"/>
-        <button mat-button #send (click)="sendMessage()">Send</button>
+        <ng-container *ngIf="!banned">
+            <input [(ngModel)]="message" (keydown.enter)="sendMessage()"/>
+            <button mat-button #send (click)="sendMessage()">Send</button>
+        </ng-container>
+        <ng-container *ngIf="banned">
+            <div class="penalty-block">
+                <h3>Вас забанили в этом чате!!!</h3>
+            </div>
+        </ng-container>
     </div>
 </div>

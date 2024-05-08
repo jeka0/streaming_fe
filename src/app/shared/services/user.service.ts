@@ -24,6 +24,17 @@ export class UserService {
       },
       error:err=>console.log(err)
     })
+    socketService.reconnect.subscribe({
+      next:(res)=>{
+        if(res){
+          const user = { subscription: this.savedRange };
+          this.savedRange = [];
+          this.trackingUpdate(user as IUser);
+          this.savedRange=user.subscription;
+        }
+      },
+      error:err=>console.log(err)
+    })
   }
 
   getById(id: number): Observable<IUser> {
@@ -91,9 +102,7 @@ export class UserService {
   }
 
   trackingUpdate(user: IUser){
-      const set1 = new Set(this.savedRange);
-      const set2 = new Set(user.subscription);
-      this.socketService.joinRange(user.subscription.filter(e => !set1.has(e)));
-      this.socketService.leaveRange(this.savedRange.filter(e => !set2.has(e)));
+      this.socketService.joinRange(user.subscription.filter(e => !this.savedRange.some(se => se.id === e.id)));
+      this.socketService.leaveRange(this.savedRange.filter(e => !user.subscription.some(se => se.id === e.id)));
   }
 }

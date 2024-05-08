@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { MatDialog } from '@angular/material/dialog';
 import { IUser } from '../../interfaces/user.interface';
 import { SocketService } from '../../services/socket.service';
+import { IChat } from '../../interfaces/chat.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-message',
@@ -13,6 +15,7 @@ import { SocketService } from '../../services/socket.service';
 })
 export class MessageComponent {
     @Input() message?: IMessage;
+    @Input() chat!:BehaviorSubject<IChat|undefined>
     profile?: IUser;
   
     constructor(
@@ -23,6 +26,16 @@ export class MessageComponent {
       this.userService.profile.subscribe((profile)=>{
         this.profile = profile;
       });
+    }
+
+    ngOnInit(){
+      if(this.message)this.chat.next(this.message.chat);
+      this.chat.subscribe({
+        next:newChat=>{
+          if(this.message && newChat)this.message.chat = newChat
+        },
+        error:err=>console.log(err)
+      })
     }
 
     isModer(){

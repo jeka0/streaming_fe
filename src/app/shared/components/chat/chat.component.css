@@ -99,3 +99,18 @@
     width: 100%;
     font-size: 5px;
 }
+
+.penalty-block{
+    flex:1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.penalty-block h3{
+    color: white;
+    margin: 0;
+    word-break: break-all;
+    word-break: break-word;
+}

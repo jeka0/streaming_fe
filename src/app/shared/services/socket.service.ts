@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { io, Socket } from 'socket.io-client';
+import { BehaviorSubject } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { IUser } from '../interfaces/user.interface';
 export class SocketService {
   socket!: Socket;
   intervalID?: NodeJS.Timeout;
+  reconnect: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(private auth: AuthService) { 
 
@@ -23,6 +25,7 @@ export class SocketService {
     this.socket.on('connect', ()=>{
       console.log("User connected");
       if(this.intervalID) clearInterval(this.intervalID);
+      this.reconnect.next(1);
     });
 
     this.socket.on('error', err=>{

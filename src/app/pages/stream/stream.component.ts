@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { StreamService } from 'src/app/shared/services/stream.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
-import { mergeMap, of, Subject, BehaviorSubject } from 'rxjs';
+import { mergeMap, of, Subject, BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { IStream } from 'src/app/shared/interfaces/stream.interface';
 import { ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
@@ -22,6 +22,7 @@ export class StreamComponent {
   videoUrl?: string;
   name?: string;
   viewer_count: number = 0;
+  subscription?: Subscription;
 
 
   constructor(
@@ -47,11 +48,18 @@ export class StreamComponent {
         return this.userService.getByLogin(params['name']);
       }),
       mergeMap((user)=>{
-        this.socketService.joinTo(`${user.login}/live`);
+        this.subscription = this.socketService.reconnect.subscribe({
+          next:(res)=>{
+            if(res){
+              if(!this.videoName)this.socketService.joinTo(`${user.login}/live`);
+              this.chatId.next(user.chat.id);
+            }
+          },
+          error: err=>console.log(err)
+        })
         this.user.next(user);
         this.streamName.next(user.login);
         this.name = user.login;
-        this.chatId.next(user.chat.id);
         if(this.videoName)return this.streamService.getStreamByRecording(this.videoName || "");
         return this.streamService.getLiveStream(user.login);
       }),
@@ -66,6 +74,7 @@ export class StreamComponent {
   }
 
   ngOnDestroy(){
+    if(this.subscription) this.subscription.unsubscribe();
     if(this.name && !this.videoName){
       this.socketService.leaveFrom(`${this.name}/live`);
   }
