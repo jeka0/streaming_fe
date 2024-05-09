@@ -74,6 +74,7 @@ export class ChatComponent {
       })
       socketService.socket.on("timeout", ({chatId, userId, time}:{chatId:number, userId:number, time:Date})=>{
         if(this.id === chatId && this.profile?.id === userId){
+          this.untimeout();
           this.isTimeout.active = true;
           this.isTimeout.time = new Date(time).getTime() - new Date().getTime();
           this.getRemainingTime();
