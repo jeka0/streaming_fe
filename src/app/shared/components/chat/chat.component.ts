@@ -23,8 +23,10 @@ export class ChatComponent {
     info?: { type: string, message: string };
     time: number = 5000;
     timeout?: NodeJS.Timeout;
+    interval?: NodeJS.Timeout;
     profile?: IUser
     banned: boolean = false;
+    isTimeout: { active:boolean, time: number | undefined, message: string } = {active: false, time: undefined, message: ""}
 
 
     constructor(
@@ -70,6 +72,19 @@ export class ChatComponent {
           this.banned = false;
         }
       })
+      socketService.socket.on("timeout", ({chatId, userId, time}:{chatId:number, userId:number, time:Date})=>{
+        if(this.id === chatId && this.profile?.id === userId){
+          this.isTimeout.active = true;
+          this.isTimeout.time = new Date(time).getTime() - new Date().getTime();
+          this.getRemainingTime();
+          this.interval = setInterval(()=>this.getRemainingTime(), 1000);
+        }
+      })
+      socketService.socket.on("untimeout", ({chatId, userId})=>{
+        if(this.id === chatId && this.profile?.id === userId){
+          this.untimeout()
+        }
+      })
       socketService.socket.on("mod", ({chatId, userId})=>{
         if(this.id === chatId && this.profile?.id === userId && this.nowChat && this.profile){
           this.nowChat.users.push(this.profile)
@@ -82,6 +97,39 @@ export class ChatComponent {
           this.chat.next(this.nowChat);
         }
       })
+    }
+
+    untimeout(){
+      this.isTimeout.active = false;
+      this.isTimeout.time = undefined;
+      this.isTimeout.message = "";
+      if(this.interval){
+        clearInterval(this.interval);
+        this.interval = undefined;
+      } 
+    }
+
+    getRemainingTime() {
+      if(this.isTimeout?.time){
+        const seconds = Math.floor((this.isTimeout.time / 1000) % 60);
+        const minutes = Math.floor((this.isTimeout.time  / (1000 * 60)) % 60);
+        const hours = Math.floor((this.isTimeout.time  / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(this.isTimeout.time  / (1000 * 60 * 60 * 24));
+      
+        if (days > 0) {
+          this.isTimeout.message = `${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
+        } else if (hours > 0) {
+          this.isTimeout.message = `${hours} часов ${minutes} минут ${seconds} секунд`;
+        } else if (minutes > 0) {
+          this.isTimeout.message = `${minutes} минут ${seconds} секунд`;
+        } else {
+          this.isTimeout.message = `${seconds} секунд`;
+          if(seconds<0){
+            this.untimeout()
+          }
+        }
+        this.isTimeout.time -= 1000;
+      }
     }
 
     ngOnInit(){

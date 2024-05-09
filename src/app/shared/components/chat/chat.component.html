@@ -10,13 +10,18 @@
        <button class="close" mat-button (click)="closeInfo()">X</button>
     </div>
     <div class="chat-action">
-        <ng-container *ngIf="!banned">
+        <ng-container *ngIf="!banned && !isTimeout.active">
             <input [(ngModel)]="message" (keydown.enter)="sendMessage()"/>
             <button mat-button #send (click)="sendMessage()">Send</button>
         </ng-container>
         <ng-container *ngIf="banned">
             <div class="penalty-block">
                 <h3>Вас забанили в этом чате!!!</h3>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isTimeout.active">
+            <div class="penalty-block">
+                <h3>Вы отстранены на <br />{{isTimeout.message}}!!!</h3>
             </div>
         </ng-container>
     </div>
