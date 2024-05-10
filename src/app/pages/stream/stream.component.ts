@@ -51,7 +51,10 @@ export class StreamComponent {
         this.subscription = this.socketService.reconnect.subscribe({
           next:(res)=>{
             if(res){
-              if(!this.videoName)this.socketService.joinTo(`${user.login}/live`);
+              if(this.stream && !this.videoName){
+                this.socketService.leaveFrom(`${this.name}/live`);
+                this.socketService.joinTo(`${this.name}/live`)
+              };
               this.chatId.next(user.chat.id);
             }
           },
@@ -67,6 +70,7 @@ export class StreamComponent {
       next:(stream)=>{ 
         this.stream = stream;
         this.viewer_count = stream.viewer_count as number;
+        if(!this.videoName)this.socketService.joinTo(`${this.name}/live`);
         this.image.next(this.stream.user.image)
       },
       error: (err)=>console.log(err)
