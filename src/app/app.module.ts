@@ -37,6 +37,7 @@ import { ModersListComponent } from './pages/moders-list/moders-list.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddModerComponent } from './shared/components/add-moder/add-moder.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { AddModerComponent } from './shared/components/add-moder/add-moder.compo
     FormsModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

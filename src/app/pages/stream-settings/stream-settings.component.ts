@@ -7,6 +7,8 @@ import { ISettings } from 'src/app/shared/interfaces/settings.interface';
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { RoutesService } from 'src/app/shared/services/routes.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { ICategory } from 'src/app/shared/interfaces/category';
 
 @Component({
   selector: 'app-stream-settings',
@@ -18,13 +20,15 @@ export class StreamSettingsComponent {
   formGroup?: FormGroup;
   streamKey?: String;
   settings: Subject<ISettings>
+  categorys: ICategory[] = []
 
   constructor(
     private userService: UserService,
     private settingsService: SettingsService,
     private readonly fb: FormBuilder,
     private router: Router,
-    private routeService: RoutesService
+    private routeService: RoutesService,
+    private categorySetvice: CategoryService
   ){
     this.settings = new Subject<ISettings>;
   }
@@ -47,7 +51,7 @@ export class StreamSettingsComponent {
             settings.stream_title
           ),
           category:this.fb.control<string>(
-            settings.category,
+            settings.category?.name,
             Validators.required
           ),
         })
@@ -56,6 +60,10 @@ export class StreamSettingsComponent {
     })
     this.settingsService.getSettings().subscribe({
       next:(settings)=>this.settings.next(settings),
+      error:err=>console.log(err)
+    })
+    this.categorySetvice.getAllCategorys().subscribe({
+      next:(categorys)=>this.categorys = categorys,
       error:err=>console.log(err)
     })
   }

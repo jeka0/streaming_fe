@@ -35,7 +35,7 @@ h3{
 }
 
 span{
-    color: rgb(132, 0, 255);
+    color: rgb(105, 255, 41);
 }
 
 .message{
@@ -59,4 +59,8 @@ span{
     margin-left: auto;
     width: 20px;
     height: 20px;
+}
+
+.my{
+    color: rgb(164, 67, 255);
 }

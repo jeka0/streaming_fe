@@ -11,7 +11,7 @@
     </div>
     <div class="chat-action">
         <ng-container *ngIf="!banned && !isTimeout.active">
-            <input [(ngModel)]="message" (keydown.enter)="sendMessage()"/>
+            <input [(ngModel)]="message" (keydown.enter)="sendMessage()" placeholder="Отправить сообщение"/>
             <button mat-button #send (click)="sendMessage()">Send</button>
         </ng-container>
         <ng-container *ngIf="banned">

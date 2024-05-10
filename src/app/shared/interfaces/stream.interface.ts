@@ -1,9 +1,10 @@
 import { IUser } from "./user.interface";
+import { ICategory } from "./category"; 
 
 export interface IStream{
     id: Number;
     stream_title?: string; 
-    category: string;
+    category: ICategory;
     start_time: Date;
     end_time?: Date;
     viewer_count: Number;

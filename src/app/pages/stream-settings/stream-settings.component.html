@@ -43,12 +43,9 @@
         </div>
         <mat-form-field class="mat-input" appearance="outline">
             <mat-label>Category</mat-label>
-            <input
-              matInput
-              type="text"
-              placeholder="Category"
-              formControlName="category"
-            />
+            <mat-select placeholder="Category" formControlName="category">
+                <mat-option *ngFor="let category of categorys" [value]="category.name">{{category.name}}</mat-option>
+            </mat-select>
             <mat-error *ngIf="formGroup.controls['category'].invalid">
                 Category is <strong>required</strong>
             </mat-error>
