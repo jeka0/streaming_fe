@@ -6,7 +6,11 @@
     margin: 1px;
 }
 
-.close {
+.tag-l{
+    color: white;
+}
+
+.close-tag {
     top: 0;
     right: 0;
     min-width: unset!important;
@@ -16,7 +20,7 @@
     font-size: 12px;
     line-height: 14px;
     margin-left: 2px;
-    color: white;
+    color: white !important;
 
     .mat-mdc-button-touch-target {
         width: 10px !important;
