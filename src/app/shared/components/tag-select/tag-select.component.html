@@ -1,0 +1,54 @@
+<div class="add-area">
+    <div class="search-area">
+        <div class="search-input">
+            <div #menuB  [matMenuTriggerFor]="menu"></div>
+            <input 
+                [(ngModel)]="searchValue"
+                type="text" 
+                placeholder=" Введите тег" 
+                (change)="search()" 
+                (input)="closeMenu()">
+            <button [disabled]="searchValue ==''" mat-icon-button class="search-but" (click)="search()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+        <mat-error *ngIf="errorMessage" class="error">
+            {{errorMessage}}
+        </mat-error>
+        <div class="tag-list" *ngIf="profile">
+            <ng-container *ngFor="let tag of profile.tags">
+                <app-tag-preview [tag]="tag" [removeBut]="true" (onRemove)="setUser($event)"></app-tag-preview>
+            </ng-container>
+        </div>
+    </div>
+    <mat-menu class="search-menu" #menu="matMenu" class="customize" >
+        <div class="menu-cont">
+            <ng-container *ngIf="this.searchList.length == 0">
+                <h3>Результат не найден</h3>
+            </ng-container>
+            <ng-container *ngIf="this.searchList.length != 0">
+                <ng-container *ngFor="let tag of searchList">
+                    <button mat-menu-item (click)="select(tag)">
+                        {{tag.name}}
+                    </button>
+                </ng-container>
+            </ng-container>
+        </div>
+    </mat-menu>
+    <button
+        mat-button
+        class="mat-button"
+        color="custom"
+        id="save"
+        [disabled]="!searchValue"
+        (click)="addTag()"
+    >   
+    Добавить тег</button>
+    <button
+        mat-button
+        class="mat-button"
+        color="custom"
+        (click)="clean()"
+    >   
+    Очистить</button>
+</div>

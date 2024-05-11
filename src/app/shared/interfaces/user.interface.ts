@@ -1,4 +1,5 @@
 import { IChat } from "./chat.interface";
+import { ITag } from "./tag";
 
 export interface IUser {
     id: Number;
@@ -9,4 +10,5 @@ export interface IUser {
     chat: IChat;
     status: Boolean;
     subscription: IUser[];
+    tags: ITag[];
 }

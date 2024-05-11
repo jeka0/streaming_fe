@@ -38,6 +38,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddModerComponent } from './shared/components/add-moder/add-moder.component';
 import {MatSelectModule} from '@angular/material/select';
+import { TagSelectComponent } from './shared/components/tag-select/tag-select.component';
+import { TagPreviewComponent } from './shared/components/tag-preview/tag-preview.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import {MatSelectModule} from '@angular/material/select';
     WrapperSettingsComponent,
     StreamSettingsComponent,
     ModersListComponent,
-    AddModerComponent
+    AddModerComponent,
+    TagSelectComponent,
+    TagPreviewComponent
   ],
   imports: [
     BrowserModule,

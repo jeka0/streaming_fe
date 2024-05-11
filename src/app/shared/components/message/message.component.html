@@ -1,7 +1,7 @@
 <div *ngIf="message && profile" class="message">
     <div class="data">
         <h3 *ngIf="message">
-            <span [ngClass]="{'my':message.user.id === profile?.id}">{{message.user.login}}</span>: {{ message.message }}
+            <span [ngClass]="{'my':message.user.id === profile.id}">{{message.user.login}}</span>: {{ message.message }}
         </h3>
     </div>
     <div *ngIf="isModer()" class="action">

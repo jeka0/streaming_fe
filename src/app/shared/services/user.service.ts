@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/user.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -79,6 +79,14 @@ export class UserService {
 
   deleteCurrent(): Observable<{message: string}>{
     return this.http.delete<{message: string}>(`${environment.apiURL}/user`);
+  }
+
+  addTag(name: string): Observable<IUser>{
+    return this.http.post<IUser>(`${environment.apiURL}/user/tag`, {name});
+  }
+
+  removeTag(id: Number): Observable<IUser>{
+    return this.http.delete<IUser>(`${environment.apiURL}/user/tag/${id}`);
   }
 
   follow(id: Number): Observable<IUser>{

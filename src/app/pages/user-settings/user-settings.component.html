@@ -1,6 +1,6 @@
 <div class="info" *ngIf="formGroup && profile" [formGroup]="formGroup">
     <h2>Настройки аккаунта</h2>
-    <div class="settings-box login-box">
+    <div class="settings-box login-box no-padding">
         <app-image-template [name]="this.image"></app-image-template>
         <div class="image-active">
             <h3>Изображение профиля</h3>
@@ -21,6 +21,12 @@
             (change)="onLoadImage($event)"
         />
         </div>
+    </div>
+    <div class="settings-box login-box tag-box">
+        <div class="info-block">
+            <h3>Теги пользователя</h3>
+        </div>
+        <app-tag-select></app-tag-select>
     </div>
     <div class="settings-box login-box first-box">
         <div class="info-block">
