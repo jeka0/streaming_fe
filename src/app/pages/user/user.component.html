@@ -29,4 +29,13 @@
             <app-stream-preview *ngIf="stream" [live]="false" [stream]="stream" ></app-stream-preview>
         </ng-container>
     </div>
+    <mat-paginator
+        class="paginator-user"
+        #paginator
+        [length]="length"
+        (page)="onPage($event)"
+        [pageSize]="pages[0]"
+        [pageSizeOptions]="pages"
+        aria-label="Select page">
+    </mat-paginator>
 </div>

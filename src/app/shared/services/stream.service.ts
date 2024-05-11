@@ -15,8 +15,8 @@ export class StreamService {
     return this.http.post<IStream>(`${environment.apiURL}/stream/live/name`, {name});
   }
 
-  getLiveStreams():Observable<any>{
-    return this.http.get<any>('http://localhost:8888/api/streams');
+  getLiveStreams():Observable<IStream[]>{
+    return this.http.get<IStream[]>(`${environment.apiURL}/stream/live`);
   }
 
   getUserStreams(id: Number): Observable<IStream[]>{
@@ -25,5 +25,32 @@ export class StreamService {
 
   getStreamByRecording(name: string): Observable<IStream>{
     return this.http.get<IStream>(`${environment.apiURL}/stream/recording/${name}`);
+  }
+
+  getStreamsRange(page: Number, limit: Number, order?: String, category?: String): Observable<{data:IStream[], total:number}>{
+    let url = `${environment.apiURL}/stream/streams?page=${page}&limit=${limit}`;
+
+    if(order)url = `${url}&order=${order}`;
+    if(category)url = `${url}&category=${category}`; 
+
+    return this.http.get<{data:IStream[], total:number}>(url);
+  }
+
+  getUserStreamsRange(id: Number, page: Number, limit: Number, order?: String, category?: String): Observable<{data:IStream[], total:number}>{
+    let url = `${environment.apiURL}/stream/streams/user/${id}?page=${page}&limit=${limit}`;
+
+    if(order)url = `${url}&order=${order}`;
+    if(category)url = `${url}&category=${category}`; 
+
+    return this.http.get<{data:IStream[], total:number}>(url);
+  }
+
+  getLiveStreamsRange(page: Number, limit: Number, order?: String, category?: String): Observable<{data:IStream[], total:number}>{
+    let url = `${environment.apiURL}/stream/streams/live?page=${page}&limit=${limit}`;
+
+    if(order)url = `${url}&order=${order}`;
+    if(category)url = `${url}&category=${category}`; 
+
+    return this.http.get<{data:IStream[], total:number}>(url);
   }
 }

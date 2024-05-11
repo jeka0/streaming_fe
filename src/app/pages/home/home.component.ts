@@ -9,29 +9,12 @@ import { mergeMap, map, mergeAll, toArray, of } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  streams: (IStream | undefined)[] = [];
+  streams: IStream[] = [];
 
   constructor(private streamService: StreamService){}
 
   ngOnInit(){
     this.streamService.getLiveStreams()
-    .pipe(
-      map((streams)=>{
-        let names: String[] = [];
-        for(let key in streams['live']){
-          names.push(key);
-        }
-        return names;
-    }),
-      mergeAll(),
-        mergeMap((name) => {
-          if (name) {
-            return this.streamService.getLiveStream(name);
-          }
-          return of(undefined);
-        }),
-        toArray(),
-    )
     .subscribe({
       next:(streams)=>{this.streams = streams},
       error:(err)=>console.log(err)
