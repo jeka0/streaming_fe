@@ -7,7 +7,14 @@
                 <div class="info-text">
                     <h2>{{stream.user.login}}</h2> 
                     <h3>{{stream.stream_title}}</h3>
-                    <h4>{{stream.category.name}}</h4>
+                    <div class="tags">
+                        <h4>{{stream.category.name}}</h4>
+                        <div class="tag-list" *ngIf="profile">
+                            <ng-container *ngFor="let tag of profile.tags">
+                                <app-tag-preview [tag]="tag"></app-tag-preview>
+                            </ng-container>
+                        </div>
+                    </div>
                 </div>
             </a>
             <div class="stream-actions">

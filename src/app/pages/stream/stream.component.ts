@@ -18,6 +18,7 @@ export class StreamComponent {
   chatId: Subject<Number>= new Subject<Number>();
   user: BehaviorSubject<IUser  | undefined> = new BehaviorSubject<IUser | undefined>(undefined);
   image: BehaviorSubject<string | undefined>;
+  profile?: IUser
   videoName?: string;
   videoUrl?: string;
   name?: string;
@@ -63,6 +64,7 @@ export class StreamComponent {
         this.user.next(user);
         this.streamName.next(user.login);
         this.name = user.login;
+        this.profile = user;
         if(this.videoName)return this.streamService.getStreamByRecording(this.videoName || "");
         return this.streamService.getLiveStream(user.login);
       }),

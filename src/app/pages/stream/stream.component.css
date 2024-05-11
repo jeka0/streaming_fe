@@ -64,3 +64,18 @@ a {
 .stream-actions{
     flex-grow: 1;
 }
+
+
+.tag-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2px;
+    max-width: 500px;
+    margin-left: 4px;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+}

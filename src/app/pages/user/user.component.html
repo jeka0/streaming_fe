@@ -6,6 +6,11 @@
             <div *ngIf="user.status" class="live">LIVE</div>
         </div>
         <div class="user-action">
+            <div class="tag-list" *ngIf="user">
+                <ng-container *ngFor="let tag of user.tags">
+                    <app-tag-preview [tag]="tag"></app-tag-preview>
+                </ng-container>
+            </div>
             <a *ngIf="user.status" routerLink="./live">
                 <button class = 'live-but'>Go to live</button>
             </a>

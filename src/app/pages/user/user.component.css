@@ -94,3 +94,14 @@ hr{
     margin-left: 20px;
     margin-right: 20px;
 }
+
+
+.tag-list{
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2px;
+    max-width: 500px;
+}

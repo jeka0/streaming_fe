@@ -37,7 +37,7 @@ export class TagSelectComponent {
       .subscribe({
         next:(result)=>{
           if(result){
-            this.profile = result;
+            this.userService.profile.next(result);
             this.clean();
           }
         },
@@ -75,6 +75,6 @@ export class TagSelectComponent {
   }
 
   setUser(user: IUser){
-    this.profile = user;
+    this.userService.profile.next(user)
   }
 }
