@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 export class StreamPreviewComponent {
   @Input() stream!: IStream;
   @Input() live!: Boolean;
+  @Input() pref?: Boolean;
   streamUrl: String = "";
   errUrl: String = 'assets/Img/stream_image.jpg';
   image: BehaviorSubject<string | undefined>;
@@ -33,7 +34,7 @@ export class StreamPreviewComponent {
     else {
       const name = this.stream.recording_file.split('.')[0];
       this.streamUrl = `${environment.apiURL}/thumbnail/${name}.png`
-      this.routerLink = name;
+      this.routerLink = this.pref? `${this.stream.user.login}/${name}`: name;
     }
   }
 }

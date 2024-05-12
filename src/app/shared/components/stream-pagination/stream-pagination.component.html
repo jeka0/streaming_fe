@@ -1,0 +1,28 @@
+<div class="stream-pagination">
+    <mat-form-field class="paginator-category" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select class="select" placeholder="Category" [(ngModel)]="category" (selectionChange)="onCategory()">
+            <mat-option *ngFor="let category of categorys" [value]="category.name">{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="sort-area">
+        <button class="sort-but" mat-button (click)="toggleOrder()">
+            <span>{{order? upMessage : downMessage}}</span>
+            <mat-icon 
+                aria-hidden="false"
+                aria-label="Example home icon"
+                [fontIcon]="order? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            ></mat-icon>
+        </button>
+    </div>
+    <mat-paginator
+            class="paginator-user"
+            #paginator
+            [length]="length"
+            (page)="onPage($event)"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="pages"
+            aria-label="Select page">
+    </mat-paginator>
+</div>

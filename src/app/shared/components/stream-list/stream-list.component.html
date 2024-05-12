@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+<div class="stream-list">
+    <div *ngIf="streams.length === 0" class="message">
+        <h1>{{emptyMessage}}</h1>
+    </div>
+    <ng-container *ngFor="let stream of streams">
+        <app-stream-preview *ngIf="stream" [live]="live" [stream]="stream" [pref]="!live"></app-stream-preview>
+    </ng-container>
+</div>
+<app-stream-pagination 
+    [length]="length"
+    [pages]="pages"
+    (getStreams)="getStreams($event)"
+></app-stream-pagination>

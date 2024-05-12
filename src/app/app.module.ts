@@ -40,6 +40,8 @@ import { AddModerComponent } from './shared/components/add-moder/add-moder.compo
 import {MatSelectModule} from '@angular/material/select';
 import { TagSelectComponent } from './shared/components/tag-select/tag-select.component';
 import { TagPreviewComponent } from './shared/components/tag-preview/tag-preview.component';
+import { StreamPaginationComponent } from './shared/components/stream-pagination/stream-pagination.component';
+import { StreamListComponent } from './shared/components/stream-list/stream-list.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { TagPreviewComponent } from './shared/components/tag-preview/tag-preview
     ModersListComponent,
     AddModerComponent,
     TagSelectComponent,
-    TagPreviewComponent
+    TagPreviewComponent,
+    StreamPaginationComponent,
+    StreamListComponent
   ],
   imports: [
     BrowserModule,

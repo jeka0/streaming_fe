@@ -1,0 +1,65 @@
+.stream-pagination{
+    display: flex;
+    flex-direction: row;
+    background-color: #0e0e10;
+}
+
+.paginator-category{
+    margin: 0;
+    margin-left: 20px;
+}
+
+.paginator-user{
+    flex: 1;
+}
+
+.sort-area{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.sort-but span,
+.sort-but mat-icon{
+    color: white;
+}
+
+::ng-deep .paginator-category .mat-mdc-form-field-subscript-wrapper{
+    height: 0;
+}
+
+::ng-deep .paginator-user .mat-mdc-paginator-container {
+    background-color: #0e0e10;
+    border: none;
+    color: white;
+}
+
+::ng-deep .paginator-user .mat-mdc-paginator-icon{
+    fill: white;
+}
+
+mat-form-field, mat-label, .mat-primary input,
+::ng-deep .paginator-category .mat-mdc-select-value-text,
+::ng-deep .cdk-overlay-pane .ng-star-inserted .mdc-list-item__primary-text,
+::ng-deep .paginator-user .mat-mdc-select-value,
+::ng-deep .stream-pagination .mat-mdc-select-arrow{
+    color: white;
+}
+
+::ng-deep .paginator-user .mdc-icon-button[disabled] .mat-mdc-paginator-icon{
+    fill: rgba(255, 255, 255, 0.282)
+}
+
+::ng-deep .stream-pagination .mat-form-field-appearance-outline .mdc-text-field--outlined{
+    background-color: #7a7a7a34;
+    border-radius: 5px;
+}
+
+::ng-deep .cdk-overlay-pane .ng-star-inserted{
+    background-color: #3d3d3d;
+}
+
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+::ng-deep .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: rgb(20, 110, 255);
+}

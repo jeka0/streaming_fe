@@ -3,7 +3,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
 import { IUser } from '../../interfaces/user.interface';
-import { ITag } from '../../interfaces/tag';
+import { ITag } from '../../interfaces/tag.interface';
 
 @Component({
   selector: 'app-tag-select',

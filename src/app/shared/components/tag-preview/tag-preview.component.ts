@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { ITag } from '../../interfaces/tag';
+import { ITag } from '../../interfaces/tag.interface';
 
 @Component({
   selector: 'app-tag-preview',

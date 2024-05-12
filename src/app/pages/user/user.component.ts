@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { StreamService } from 'src/app/shared/services/stream.service';
-import { switchMap, BehaviorSubject, mergeMap} from 'rxjs'
+import { switchMap, BehaviorSubject} from 'rxjs'
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { IStream } from 'src/app/shared/interfaces/stream.interface';
-import { PageEvent } from '@angular/material/paginator';
+import { IPagination } from 'src/app/shared/interfaces/pagination.interface';
 
 @Component({
   selector: 'app-user',
@@ -36,15 +36,15 @@ export class UserComponent {
         this.user = user;
         this.bUser.next(user);
         this.image.next(user.image);
-        this.getStreams(1, this.pages[0]);
+        this.getStreams({page: 1, limit: this.pages[0]});
       },
       error:err=>console.log(err)
     })
   }
 
-  getStreams(page:Number, limit:Number){
+  getStreams({page, limit, order, category}:IPagination){
     if(this.user){
-      this.streamService.getUserStreamsRange(this.user.id, page, limit)
+      this.streamService.getUserStreamsRange(this.user.id, page, limit, order, category)
       .subscribe({
         next:(result)=>{
           this.length = result.total;
@@ -53,9 +53,5 @@ export class UserComponent {
         error:err=> console.log(err)
       })
     }
-  }
-  
-  onPage(event: PageEvent){
-    this.getStreams(event.pageIndex + 1, event.pageSize);
   }
 }

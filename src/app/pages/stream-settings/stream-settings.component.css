@@ -44,7 +44,7 @@ h3{
     margin-bottom: 16px;
 }
 
-mat-option, mat-form-field, mat-label, .mat-primary input{
+mat-form-field, mat-label, .mat-primary input{
     color: white;
 }
 

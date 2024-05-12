@@ -1,5 +1,5 @@
 import { IChat } from "./chat.interface";
-import { ITag } from "./tag";
+import { ITag } from "./tag.interface";
 
 export interface IUser {
     id: Number;

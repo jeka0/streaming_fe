@@ -8,7 +8,7 @@ import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { RoutesService } from 'src/app/shared/services/routes.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
-import { ICategory } from 'src/app/shared/interfaces/category';
+import { ICategory } from 'src/app/shared/interfaces/category.interface';
 
 @Component({
   selector: 'app-stream-settings',

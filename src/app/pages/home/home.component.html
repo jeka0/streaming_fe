@@ -1,11 +1,21 @@
 <div class="home-background">
-    <h1>Трансляции в прямом эфире:</h1>
-    <div class="stream-list">
-        <div *ngIf="streams.length === 0" class="message">
-            <h1>На данный момент трансляции отсутствуют!</h1>
-        </div>
-        <ng-container *ngFor="let stream of streams">
-            <app-stream-preview *ngIf="stream" [live]="true" [stream]="stream" ></app-stream-preview>
-        </ng-container>
+    <h1>Навигация:</h1>
+    <div class="navigation">
+        <button 
+            class="nav-but" 
+            [ngClass]="{'select': live, 'unselect': !live}" 
+            mat-button
+            (click)="selectLive()">
+            <h1>Трансляции в прямом эфире</h1>
+        </button>
+        <button 
+            class="nav-but" 
+            [ngClass]="{'select': !live, 'unselect': live}" 
+            mat-button
+            (click)="selectUnLive()">
+            <h1>Записи трансляций</h1>
+        </button>
     </div>
+    <app-stream-list *ngIf="live" class="list" [live]="true"></app-stream-list>
+    <app-stream-list *ngIf="!live" class="list"></app-stream-list>
 </div>

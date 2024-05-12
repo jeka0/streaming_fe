@@ -1,4 +1,4 @@
-import { ICategory } from "./category";
+import { ICategory } from "./category.interface";
 
 export interface ISettings{
     id: Number;
