@@ -43,8 +43,8 @@
             <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
               Login is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="formGroup.controls['login'].hasError('login')">
-                This login is already in use by another account
+            <mat-error *ngIf="formGroup.controls['login'].hasError('login') && errMessage">
+                {{errMessage}}
               </mat-error>
               <mat-error *ngIf="formGroup.controls['login'].hasError('maxlength')">
                 Login must be less than 16 characters

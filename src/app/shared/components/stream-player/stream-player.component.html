@@ -1,4 +1,4 @@
-<video *ngIf="!video" #videoPlayer controls  autoplay muted  (canplay)="videoPlayer.play()"
+<video *ngIf="!video" #videoPlayer autoplay muted  (canplay)="videoPlayer.play()"
 (loadedmetadata)="videoPlayer.muted = true"></video>
 
 <video *ngIf="video && url" [src]="url" controls autoplay></video>

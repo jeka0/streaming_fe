@@ -15,6 +15,7 @@ export class UserSettingsComponent {
   profile?: IUser;
   formGroup?: FormGroup;
   image: BehaviorSubject<string | undefined>;
+  errMessage?: string;
 
   constructor(
     private userService: UserService,
@@ -56,7 +57,10 @@ export class UserSettingsComponent {
       mergeMap(()=>this.userService.getCurrent())
     ).subscribe({
       next: () => {},
-      error: (err) => {this.formGroup!.controls['login'].setErrors({'login': true})},
+      error: (err) => {
+        this.errMessage = err.error;
+        this.formGroup!.controls['login'].setErrors({'login': true});
+      },
     });
   }
 
