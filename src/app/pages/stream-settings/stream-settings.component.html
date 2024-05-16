@@ -35,6 +35,9 @@
               placeholder="Stream title"
               formControlName="stream_title"
             />
+            <mat-error *ngIf="formGroup.controls['stream_title'].hasError('required')">
+                Stream title is <strong>required</strong>
+              </mat-error>
           </mat-form-field>
     </div>
     <div class="settings-box login-box">

@@ -46,6 +46,9 @@
             <mat-error *ngIf="formGroup.controls['login'].hasError('login')">
                 This login is already in use by another account
               </mat-error>
+              <mat-error *ngIf="formGroup.controls['login'].hasError('maxlength')">
+                Login must be less than 16 characters
+              </mat-error>
           </mat-form-field>
     </div>
     <div class="settings-box login-box">
@@ -60,6 +63,9 @@
               placeholder="Password"
               formControlName="password"
             />
+            <mat-error *ngIf="formGroup.controls['password'].hasError('minlength')">
+                Password must be more than 5 characters
+              </mat-error>
           </mat-form-field>
     </div>
     <div class="settings-box login-box box-active">

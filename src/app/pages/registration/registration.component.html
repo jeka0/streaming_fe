@@ -14,6 +14,12 @@
         <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
             Login is <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="formGroup.controls['login'].hasError('registration')">
+          This login is already in use by another account
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls['login'].hasError('maxlength')">
+          Login must be less than 16 characters
+        </mat-error>
       </mat-form-field>
   
       <mat-form-field class="mat-input" appearance="outline">
@@ -32,8 +38,8 @@
         <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="formGroup.controls['password'].hasError('registration')">
-          This login is already in use by another account
+        <mat-error *ngIf="formGroup.controls['password'].hasError('minlength')">
+          Password must be more than 5 characters
         </mat-error>
       </mat-form-field>
   

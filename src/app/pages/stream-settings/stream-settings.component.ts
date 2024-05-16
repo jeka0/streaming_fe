@@ -48,7 +48,8 @@ export class StreamSettingsComponent {
       next:(settings)=>{
         this.formGroup = this.fb.group({
           stream_title: this.fb.control<string | undefined>(
-            settings.stream_title
+            settings.stream_title,
+            Validators.required
           ),
           category:this.fb.control<string>(
             settings.category?.name,

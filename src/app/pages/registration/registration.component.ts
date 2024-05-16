@@ -19,8 +19,8 @@ export class RegistrationComponent implements OnInit  {
   ) {
     this.showPassword = false;
     this.formGroup = this.fb.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
+      login: ['', [Validators.required, Validators.maxLength(15)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit  {
   register() {
     this.authService.register(this.formGroup.value).subscribe({
       next: () => this.router.navigateByUrl('/'),
-      error: (err) => this.formGroup.controls['password'].setErrors({'registration': true}),
+      error: (err) => this.formGroup.controls['login'].setErrors({'registration': true}),
     });
   }
 

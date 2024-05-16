@@ -34,10 +34,11 @@ export class UserSettingsComponent {
         this.formGroup = this.fb.group({
           login: this.fb.control<string | undefined>(
             profile?.login,
-            Validators.required
+            [Validators.required, Validators.maxLength(15)]
           ),
           password: this.fb.control<string | undefined>(
-            ""
+            "",
+            Validators.minLength(5)
           ),
           avatar: this.fb.control<string>(String(profile?.image || '')),
         });
