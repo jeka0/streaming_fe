@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { StreamService } from 'src/app/shared/services/stream.service';
-import { switchMap, BehaviorSubject} from 'rxjs'
+import { switchMap, BehaviorSubject, Subject} from 'rxjs'
 import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { IStream } from 'src/app/shared/interfaces/stream.interface';
 import { IPagination } from 'src/app/shared/interfaces/pagination.interface';
@@ -19,6 +19,7 @@ export class UserComponent {
   streams: IStream[] = [];
   length!: number;
   pages: number[] = [3, 6, 9, 12];
+  deleteEvent: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private userService: UserService,
@@ -53,5 +54,9 @@ export class UserComponent {
         error:err=> console.log(err)
       })
     }
+  }
+
+  deleteStream(){
+    this.deleteEvent.next(true);
   }
 }

@@ -53,4 +53,8 @@ export class StreamService {
 
     return this.http.get<{data:IStream[], total:number}>(url);
   }
+
+  deleteStream(id: Number): Observable<{message: string}>{
+    return this.http.delete<{message: string}>(`${environment.apiURL}/stream/${id}`);
+  }
 }

@@ -1,6 +1,15 @@
 <div class="stream-preview">
-    <a [routerLink]="routerLink">
         <div *ngIf="live" class="live">LIVE</div>
+        <div *ngIf="isDelete" class="delete">
+            <button
+            mat-icon-button
+            (click)="delete()"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+        
+        </div>
+        <a [routerLink]="routerLink">
         <img [src]="streamUrl" (error)="error()"/>
         <div class="stream-preview-user">
             <app-image-template [name]="this.image"></app-image-template>

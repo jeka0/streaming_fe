@@ -3,6 +3,7 @@ import { CategoryService } from '../../services/category.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ICategory } from '../../interfaces/category.interface';
 import { IPagination } from '../../interfaces/pagination.interface';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-stream-pagination',
@@ -14,6 +15,7 @@ export class StreamPaginationComponent {
   @Input() pages: number[] = [3, 6, 9, 12];
   @Input() downMessage: string = "Сортировать по новым";
   @Input() upMessage: string = "Сортировать по старым";
+  @Input() onDelete?: Subject<boolean>;
   @Output() getStreams = new EventEmitter<IPagination>();
   defaultCategory!: ICategory;
   categorys!: ICategory[];
@@ -34,6 +36,16 @@ export class StreamPaginationComponent {
   }
 
   ngOnInit(){
+    if(this.onDelete){
+      this.onDelete.subscribe({
+        next: flag=>{
+          if(flag){
+            this.updateData(1, this.pageSize);
+          }
+        },
+        error: err=>console.log(err)
+      })
+    }
     this.categorySetvice.getAllCategorys().subscribe({
       next:(categorys)=>{
         this.categorys = [this.defaultCategory, ...categorys];

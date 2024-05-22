@@ -26,12 +26,18 @@
             <h1>Записи трансляций отсутствуют!</h1>
         </div>
         <ng-container *ngFor="let stream of streams">
-            <app-stream-preview *ngIf="stream" [live]="false" [stream]="stream" ></app-stream-preview>
+            <app-stream-preview 
+            *ngIf="stream" 
+            [live]="false" 
+            [stream]="stream"
+            [deleteBut]="true"
+            (onDelete)="deleteStream()"></app-stream-preview>
         </ng-container>
     </div>
     <app-stream-pagination 
         [length]="length"
         [pages]="pages"
         (getStreams)="getStreams($event)"
+        [onDelete]="deleteEvent"
     ></app-stream-pagination>
 </div>
