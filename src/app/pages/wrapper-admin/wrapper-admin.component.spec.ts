@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddModerComponent } from './add-moder.component';
+import { WrapperAdminComponent } from './wrapper-admin.component';
 
-describe('AddModerComponent', () => {
-  let component: AddModerComponent;
-  let fixture: ComponentFixture<AddModerComponent>;
+describe('WrapperAdminComponent', () => {
+  let component: WrapperAdminComponent;
+  let fixture: ComponentFixture<WrapperAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddModerComponent ]
+      declarations: [ WrapperAdminComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddModerComponent);
+    fixture = TestBed.createComponent(WrapperAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,7 +18,6 @@ export class LiveGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> {
       return this.userService.getByLogin(route.params['name']).pipe(
         map((user)=> {
-          console.log(user)
           if(!user.status) this.router.navigateByUrl(route.params['name']);
           return !!user.status
         })

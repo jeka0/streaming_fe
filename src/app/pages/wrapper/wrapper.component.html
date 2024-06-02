@@ -29,6 +29,9 @@
             <a routerLink="/settings">
                 <button mat-menu-item>Settings</button>
             </a>
+            <a *ngIf="profile?.role?.name === 'Admin'" routerLink="/admin">
+                <button mat-menu-item>Administration</button>
+            </a>
             <button mat-menu-item (click)="logout()">
                 <span>Logout</span>
             </button>

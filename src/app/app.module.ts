@@ -36,12 +36,16 @@ import { StreamSettingsComponent } from './pages/stream-settings/stream-settings
 import { ModersListComponent } from './pages/moders-list/moders-list.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { AddModerComponent } from './shared/components/add-moder/add-moder.component';
+import { AddUserComponent } from './shared/components/add-user/add-user.component';
 import {MatSelectModule} from '@angular/material/select';
 import { TagSelectComponent } from './shared/components/tag-select/tag-select.component';
 import { TagPreviewComponent } from './shared/components/tag-preview/tag-preview.component';
 import { StreamPaginationComponent } from './shared/components/stream-pagination/stream-pagination.component';
 import { StreamListComponent } from './shared/components/stream-list/stream-list.component';
+import { WrapperAdminComponent } from './pages/wrapper-admin/wrapper-admin.component';
+import { AdminsListComponent } from './pages/admins-list/admins-list.component';
+import { GlobalBanListComponent } from './pages/global-ban-list/global-ban-list.component';
+import { BanButtonComponent } from './shared/components/ban-button/ban-button.component';
 
 
 @NgModule({
@@ -67,11 +71,15 @@ import { StreamListComponent } from './shared/components/stream-list/stream-list
     WrapperSettingsComponent,
     StreamSettingsComponent,
     ModersListComponent,
-    AddModerComponent,
+    AddUserComponent,
     TagSelectComponent,
     TagPreviewComponent,
     StreamPaginationComponent,
-    StreamListComponent
+    StreamListComponent,
+    WrapperAdminComponent,
+    AdminsListComponent,
+    GlobalBanListComponent,
+    BanButtonComponent
   ],
   imports: [
     BrowserModule,

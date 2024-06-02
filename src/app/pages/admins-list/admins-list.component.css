@@ -1,0 +1,71 @@
+h2{
+    margin-top: 0;
+    color: white;
+}
+
+a, h3 {
+    margin: 0;
+    color: white;
+}
+
+.table-area{
+    width: 80%;
+    margin-left: 20px;
+}
+
+.table{
+    background-color: #18181b;
+    border: 1px solid #ffffff3b;
+    color: white;
+}
+
+td, th{
+    color: white;
+}
+
+.table .ng-star-inserted{
+    border-bottom: 1px solid #ffffff3b;
+}
+
+.mat-mdc-cell .ng-star-inserted{
+    border-bottom: none;
+}
+
+.action-cell{
+    width: 50px;
+}
+
+.image-cell{
+    width: 50px;
+}
+
+::ng-deep .mat-mdc-paginator-container {
+    background-color: #18181b;
+    border: 1px solid #ffffff3b;
+    color: white;
+}
+
+::ng-deep .cdk-overlay-pane .ng-star-inserted .mdc-list-item__primary-text,
+::ng-deep .mat-mdc-paginator .mat-mdc-select-value,
+::ng-deep .paginator .mat-mdc-button-base,
+::ng-deep .mat-mdc-select-arrow{
+    color: white;
+}
+
+
+::ng-deep .paginator .mat-mdc-paginator-icon{
+    fill: white;
+}
+
+::ng-deep .paginator .mdc-icon-button[disabled] .mat-mdc-paginator-icon{
+    fill: rgba(255, 255, 255, 0.282)
+}
+
+::ng-deep .mat-form-field-appearance-outline .mdc-text-field--outlined{
+    background-color: #7a7a7a34;
+    border-radius: 5px;
+}
+
+::ng-deep .cdk-overlay-pane .ng-star-inserted{
+    background-color: #3d3d3d;
+}

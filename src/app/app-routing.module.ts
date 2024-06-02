@@ -15,6 +15,10 @@ import { Page404Component } from './pages/page404/page404.component';
 import { WrapperSettingsComponent } from './pages/wrapper-settings/wrapper-settings.component';
 import { StreamSettingsComponent } from './pages/stream-settings/stream-settings.component'; 
 import { ModersListComponent } from './pages/moders-list/moders-list.component';
+import { WrapperAdminComponent } from './pages/wrapper-admin/wrapper-admin.component';
+import { AdminsListComponent } from './pages/admins-list/admins-list.component';
+import { GlobalBanListComponent } from './pages/global-ban-list/global-ban-list.component';
+import { AdminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -54,6 +58,22 @@ const routes: Routes = [
           {
             path: 'moders',
             component: ModersListComponent,
+          },
+        ]
+      },
+      {
+        path: 'admin',
+        component: WrapperAdminComponent,
+        canActivate: [AdminGuard],
+        canActivateChild: [AdminGuard],
+        children:[
+          {
+            path: '',
+            component: AdminsListComponent,
+          },
+          {
+            path: 'banList',
+            component: GlobalBanListComponent,
           },
         ]
       },

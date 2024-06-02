@@ -21,6 +21,7 @@ export class ModersListComponent {
   moders?: IUser[];
   dataSource = new MatTableDataSource([] as IUser[]);
   displayedColumns: string[] = ["image", "login", "delete"];
+  errorMessage?: string;
 
   constructor(
     private userService: UserService,
@@ -40,6 +41,20 @@ export class ModersListComponent {
       },
       error: err=>console.log(err)
     })
+  }
+
+  addModer(moder: IUser){
+    if(this.profile?.chat){
+      this.chatService.addModerator(this.profile.chat.id, moder.id)
+        .subscribe({
+          next:(result)=>{
+            if(result){
+              this.updateModers();
+            }
+          },
+          error: (err)=>this.errorMessage = err.error
+        })
+    }
   }
 
   updateModers(){

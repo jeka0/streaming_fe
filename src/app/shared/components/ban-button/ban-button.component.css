@@ -1,0 +1,35 @@
+button{
+    float: right;
+    width: 14%;
+    height: 24px;
+    border: none;
+    color: white;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    min-width: 110px;
+}
+
+.unsub{
+    background-color: rgb(168, 16, 16);
+}
+
+.unsub:hover{
+    background-color: rgb(128, 13, 13);
+}
+
+.unsub:active{
+    background-color: rgb(197, 20, 20);
+}
+
+.sub{
+    background-color: rgb(179, 179, 179);
+}
+
+.sub:hover{
+    background-color: rgb(129, 129, 129);
+}
+
+.sub:active{
+    background-color: rgb(211, 211, 211);
+}

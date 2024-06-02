@@ -46,14 +46,16 @@ export class UserService {
   }
 
   getCurrent(): Observable<IUser> {
-    return this.http
-      .get<IUser>(`${environment.apiURL}/user`)
-      .pipe(
+    return this.getCurr().pipe(
         tap((user) => {
           this.trackingUpdate(user);
           this.profile.next(user);
         }),
       );
+  }
+
+  getCurr(): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.apiURL}/user`);
   }
 
   getAll(): Observable<Array<IUser>> {

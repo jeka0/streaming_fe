@@ -1,27 +1,25 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { UserService } from '../../services/user.service';
-import { ChatService } from '../../services/chat.service';
 import { IUser } from '../../interfaces/user.interface';
 
 @Component({
-  selector: 'app-add-moder',
-  templateUrl: './add-moder.component.html',
-  styleUrls: ['./add-moder.component.css']
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
-export class AddModerComponent {
+export class AddUserComponent {
   @ViewChild('menuB') manuButton!: ElementRef<HTMLButtonElement>;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-  @Output() onAddModer = new EventEmitter();
+  @Output() onAdd = new EventEmitter<IUser>();
   profile?: IUser;
   searchValue: string ="";
-  searchList: IUser[] = [];
-  newModer?: IUser;
-  errorMessage?: string;
+  searchList: IUser[] = [];//
+  newUser?: IUser;
+  @Input() errorMessage?: string;
 
   constructor(
-    private userService: UserService,
-    private chatService: ChatService
+    private userService: UserService
   ){}
 
   ngOnInit(){
@@ -32,24 +30,16 @@ export class AddModerComponent {
     })
   }
 
-  addModer(){
-    if(this.profile?.chat && this.newModer){
-      this.chatService.addModerator(this.profile.chat.id, this.newModer.id)
-      .subscribe({
-        next:(result)=>{
-          if(result){
-            this.onAddModer.emit();
-            this.clean();
-          }
-        },
-        error: (err)=>this.errorMessage = err.error
-      })
+  add(){
+    if(this.newUser){
+      this.onAdd.emit(this.newUser);
+      this.clean();
     }
   }
 
   clean(){
     this.searchValue = "";
-    this.newModer = undefined;
+    this.newUser = undefined;
     this.cleanError();
   }
 
@@ -72,8 +62,8 @@ export class AddModerComponent {
     })
   }
 
-  select(moder: IUser){
-    this.newModer = moder;
-    this.searchValue = moder.login;
+  select(user: IUser){
+    this.newUser = user;
+    this.searchValue = user.login;
   }
 }

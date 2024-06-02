@@ -1,0 +1,15 @@
+<div class="admin-background">
+    <h1>Администрирование</h1>
+    <div class="admin-navigation">
+        <ng-container *ngFor="let nav of navList;">
+            <h2>
+                <a [ngClass]="nav.class" [routerLink]="nav.link">
+                    {{nav.title}}
+                </a>
+            </h2>
+        </ng-container>
+    </div>
+    <div class="admin">
+        <router-outlet></router-outlet>
+    </div>
+</div>
