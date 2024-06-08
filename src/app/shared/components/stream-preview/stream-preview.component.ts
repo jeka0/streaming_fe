@@ -45,7 +45,7 @@ export class StreamPreviewComponent {
           this.profile = profile;
           this.isDelete = !!this.deleteBut 
           && !!this.stream.end_time 
-          && this.stream.user.id === this.profile.id;
+          && (this.stream.user.id === this.profile.id || this.profile.role.name === "Admin");
         }
       },
       error: err=> console.log(err)

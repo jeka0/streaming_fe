@@ -40,7 +40,6 @@ export class WrapperComponent {
       });
       this.socketService.connect();
       this.socketService.socket.on('startAlert', (user)=>{
-        console.log("start")
         if(this.profile){
           const indx = this.profile.subscription.findIndex(u=>u.id === user.id);
           if(indx>-1) {
@@ -50,7 +49,6 @@ export class WrapperComponent {
         }
       })
       this.socketService.socket.on('endAlert', (user)=>{
-        console.log("end")
         if(this.profile){
           const indx = this.profile.subscription.findIndex(u=>u.id === user.id);
           if(indx>-1) {

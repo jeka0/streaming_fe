@@ -38,7 +38,6 @@ export class StreamComponent {
   ngOnInit(){
     this.socketService.socket.on('viewer_count',({id, viewer_count})=>{
       if(this.stream?.id === id){
-        console.log("+")
         this.viewer_count = viewer_count;
       }
     })

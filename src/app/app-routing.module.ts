@@ -19,6 +19,7 @@ import { WrapperAdminComponent } from './pages/wrapper-admin/wrapper-admin.compo
 import { AdminsListComponent } from './pages/admins-list/admins-list.component';
 import { GlobalBanListComponent } from './pages/global-ban-list/global-ban-list.component';
 import { AdminGuard } from './shared/guards/admin.guard';
+import { BanGuard } from './shared/guards/ban.guard';
 
 const routes: Routes = [
   {
@@ -83,17 +84,17 @@ const routes: Routes = [
       },
       {
         path: ':name',
-        canActivate: [HasUserGuard],
+        canActivate: [HasUserGuard, BanGuard],
         component: UserComponent,
       },
       {
         path: ':name/live',
-        canActivate: [HasUserGuard, LiveGuard],
+        canActivate: [HasUserGuard, BanGuard, LiveGuard],
         component: StreamComponent,
       },
       {
         path: ':name/:video',
-        canActivate: [HasUserGuard],
+        canActivate: [HasUserGuard, BanGuard],
         component: StreamComponent,
       },
     ]
