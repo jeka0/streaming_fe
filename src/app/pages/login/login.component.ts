@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
   }
 
   change(){
+    const login = this.formGroup.controls['login'];
+    const password = this.formGroup.controls['password'];
+    login.patchValue(login.value.trim());
+    password.patchValue(password.value.trim());
     if(
       this.formGroup.controls['password'].hasError('required') 
       || this.formGroup.controls['login'].hasError('required')

@@ -64,10 +64,20 @@ export class UserSettingsComponent {
     });
   }
 
+  change(){
+    if(this.formGroup){
+      const login = this.formGroup.controls['login'];
+      const password = this.formGroup.controls['password'];
+      login.patchValue(login.value.trim());
+      password.patchValue(password.value.trim());
+    }
+  }
+
+
   onLoadImage(event: Event) {
     const formdata = new FormData();
     const target = <HTMLInputElement>event.target;
-    if (target.files) {
+    if (target.files && target.files[0].type.match(/image\//)) {
       formdata.append('image', target.files[0]);
       this.userService.updateCurrent(formdata)
       .pipe(

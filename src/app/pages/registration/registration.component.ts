@@ -24,6 +24,13 @@ export class RegistrationComponent implements OnInit  {
     });
   }
 
+  change(){
+    const login = this.formGroup.controls['login'];
+    const password = this.formGroup.controls['password'];
+    login.patchValue(login.value.trim());
+    password.patchValue(password.value.trim());
+  }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

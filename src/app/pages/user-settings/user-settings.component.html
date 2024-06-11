@@ -39,6 +39,7 @@
               type="text"
               placeholder="Login"
               formControlName="login"
+              (input)="change()"
             />
             <mat-error *ngIf="formGroup.controls['login'].hasError('required')">
               Login is <strong>required</strong>
@@ -62,6 +63,7 @@
               type="text"
               placeholder="Password"
               formControlName="password"
+              (input)="change()"
             />
             <mat-error *ngIf="formGroup.controls['password'].hasError('minlength')">
                 Password must be more than 5 characters
